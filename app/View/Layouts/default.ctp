@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'Arena Web ');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
@@ -38,6 +38,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <body>
 	<div id="container">
 		<div id="header">
+			<?php echo $this->Html->link('Welcome', array('controller' => 'Arenas', 'action' => 'index')); ?>
+			<?php echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+			<?php echo $this->Html->link('Fighters', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+			<?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
+			<?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
 			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
@@ -54,7 +59,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				);
 			?>
 			<p>
-				<?php echo $cakeVersion; ?>
+				Gr2-02-AF
+			</p>
+			<p>
+				Charles Costrem - Clément Matthey - Yan Pierru
+			</p>
+			<p>
+			<a href="http://raspbmcynp.ddns.net/cake/Arenas">Arena web</a>
+			</p>
+			<p>
+			<a href="https://github.com/YPierru/ArenaWeb">Github</a>
 			</p>
 		</div>
 	</div>
