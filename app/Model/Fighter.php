@@ -3,15 +3,12 @@
 App::uses('AppModel', 'Model');
 
 class Fighter extends AppModel {
-
     public $displayField = 'name';
-
-    public $belongsTo = array(
-        				'Player' => array(
-            						'className' => 'Player',
-            						'foreignKey' => 'player_id'
-            						),
-        				);
+    public $belongsTo = array('Player' => array(
+                                                'className' => 'Player',
+                                                'foreignKey' => 'player_id'
+                                                ),
+                            );
 
 
 
@@ -66,8 +63,6 @@ class Fighter extends AppModel {
 
     	//debug($this->findById($fighterId));
     }
-
-
     /**
      * Make a given fighter attack in a given direction
      */
@@ -194,7 +189,12 @@ class Fighter extends AppModel {
 		$this->save($fighterDef);
     }
 
-
+    /**
+     * Create a map given the attributes of the fighter
+     */
+    public function fView($fighterID){
+        
+    }
 }
 
 ?>
