@@ -21,3 +21,11 @@ echo $this->Form->input('direction',
 
 echo $this->Form->end('Attack');
 ?>
+
+<p>Fighter</p>
+
+<?php 
+
+pr($fighter);
+
+?>
