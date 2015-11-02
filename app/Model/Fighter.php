@@ -3,15 +3,12 @@
 App::uses('AppModel', 'Model');
 
 class Fighter extends AppModel {
-
     public $displayField = 'name';
-
-    public $belongsTo = array(
-        				'Player' => array(
-            						'className' => 'Player',
-            						'foreignKey' => 'player_id'
-            						),
-        				);
+    public $belongsTo = array('Player' => array(
+                                                'className' => 'Player',
+                                                'foreignKey' => 'player_id'
+                                                ),
+                            );
 
 
 
@@ -66,8 +63,6 @@ class Fighter extends AppModel {
 
     	//debug($this->findById($fighterId));
     }
-
-
     /**
      * Make a given fighter attack in a given direction
      */
@@ -194,7 +189,28 @@ class Fighter extends AppModel {
 		$this->save($fighterDef);
     }
 
+    /**
+     * Create a map given the attributes of the fighter
+     */
+    public function fView($fighterID){
+        $myFighter=$this->findById($fighterId)["Fighter"];
+        $view = $myFighter["skill_sight"];
+    	$cooX=$myFighter["coordinate_x"];
+    	$cooY=$myFighter["coordinate_y"];
 
+        for($i=$cooX-$view;$i<$cooX+$view;$i++){
+            for($j=$cooY-$view;$j<$cooY+$view;$j++){
+                $tool = $this->find('first', array('conditions'=>array( "Tool.coordinate_x"=>$i,"Tool.coordinate_y"=>$j)));
+                $fighter = $this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$i,"Fighter.coordinate_y"=>$j)));
+                $map= array("Tool","Fighter");
+                if(!empty($tool)){
+                    $map["Tool"]=$tool;
+                }elseif(!empty($fighter)){
+                    $map["fighter"]=$fighter;
+                }
+            }
+        }
+    }
 }
 
 ?>

@@ -46,9 +46,9 @@ class ArenasController extends AppController
 			}else if($key=="Fighterattack"){
 				$this->Fighter->doAttack(1, $this->request->data[$key]['direction']);
 			}
-
+                
     	}
-
+        
         $this->set("fighter",$this->Fighter->findById(1)["Fighter"]);
     }
 
