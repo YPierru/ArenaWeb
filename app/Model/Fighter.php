@@ -193,24 +193,32 @@ class Fighter extends AppModel {
      * Create a map given the attributes of the fighter
      */
     public function fView($fighterID){
-        $myFighter=$this->findById($fighterId)["Fighter"];
+        $ToolM = ClassRegistry::init('Tool');
+        $myFighter=$this->findById($fighterID)["Fighter"];
         $view = $myFighter["skill_sight"];
     	$cooX=$myFighter["coordinate_x"];
     	$cooY=$myFighter["coordinate_y"];
-
-        for($i=$cooX-$view;$i<$cooX+$view;$i++){
-            for($j=$cooY-$view;$j<$cooY+$view;$j++){
-                $tool = $this->find('first', array('conditions'=>array( "Tool.coordinate_x"=>$i,"Tool.coordinate_y"=>$j)));
-                $fighter = $this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$i,"Fighter.coordinate_y"=>$j)));
-                $map= array("Tool","Fighter");
-                if(!empty($tool)){
-                    $map["Tool"]=$tool;
-                }elseif(!empty($fighter)){
-                    $map["fighter"]=$fighter;
-                }
+        $map=[];
+        $listFighter = $this->find("all");
+        $listTool = $ToolM->find("all");
+        foreach($listFighter as $fighter){
+            $tempX=$fighter["Fighter"]["coordinate_x"];
+            $tempY=$fighter["Fighter"]["coordinate_y"];
+            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+                $map[$tempX][$tempY]["fighter"]= $fighter;
             }
         }
+        foreach($listTool as $Tool){
+            $tempX=$Tool["coordinate_x"];
+            $tempY=$Tool["coordinate_y"];
+            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $ccoY + $view){
+                $map[$tempX][$tempY]["tool"]= $Tool;
+            }           
+        }
+        return $map;
     }
 }
+
+    
 
 ?>
