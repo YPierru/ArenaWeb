@@ -48,7 +48,7 @@ class ArenasController extends AppController
 			}
                 
     	}
-        
+        $this->set("map",$this->Fighter->fView(1));
         $this->set("fighter",$this->Fighter->findById(1)["Fighter"]);
     }
 
