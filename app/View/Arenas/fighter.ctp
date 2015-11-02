@@ -5,7 +5,8 @@
 <?php 
 
 if(!empty($_SESSION["nameFighterSelected"])){
-	echo "Fighter selected : ".$_SESSION["nameFighterSelected"];
+	echo "Fighter selected : ";
+	pr($currentFighter);
 }else{
 	echo "No fighter selected";
 }
@@ -19,6 +20,7 @@ echo $this->Form->end('Select');
 
 echo "<hr>";
 
+
 echo "Details";
 
 echo $this->Form->create('Fighterdetails');
@@ -31,7 +33,9 @@ if($selection){
 	pr($selectedFighterData);
 }
 
+
 echo "<hr>";
+
 
 echo "Create fighter";
 echo $this->Form->create('Fightercreate');

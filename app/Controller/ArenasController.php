@@ -85,6 +85,8 @@ class ArenasController extends AppController
                 //Send fighter data to the view
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
                 $_SESSION["nameFighterSelected"]=$nameSelected;
+                $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
+                
 
     		}else if($key=="Fighterdetails"){
                 $this->set('selection',true);
