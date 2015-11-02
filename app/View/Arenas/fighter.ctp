@@ -4,19 +4,38 @@
 
 <?php 
 
+if(!empty($_SESSION["nameFighterSelected"])){
+	echo "Fighter selected : ".$_SESSION["nameFighterSelected"];
+}else{
+	echo "No fighter selected";
+}
+
 echo $this->Form->create('Fighterselect');
 echo $this->Form->input('selected_fighter', array(
       'options' => $names
   ));
-echo $this->Form->end('Show');
+echo $this->Form->end('Select');
+
+
+echo "<hr>";
+
+echo "Details";
+
+echo $this->Form->create('Fighterdetails');
+echo $this->Form->input('details_fighter', array(
+      'options' => $names
+  ));
+echo $this->Form->end('Show details');
 
 if($selection){
 	pr($selectedFighterData);
 }
-/*
-$id="id";
-echo $this->Html->link("Demo", array('controller' => 'Arenas','action'=> 'fighter'), array( 'class' => 'button'));
-*/
 
-echo $this->Form->button('Btn',array('id'=>'create'));
+echo "<hr>";
+
+echo "Create fighter";
+echo $this->Form->create('Fightercreate');
+echo $this->Form->text('name');
+echo $this->Form->end('Create');
+
 ?>

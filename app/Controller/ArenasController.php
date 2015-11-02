@@ -83,10 +83,38 @@ class ArenasController extends AppController
 
     		if($key=="Fighterselect"){
                 //Send fighter data to the view
+                $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
+                $_SESSION["nameFighterSelected"]=$nameSelected;
+
+    		}else if($key=="Fighterdetails"){
                 $this->set('selection',true);
-    			$idSelected = $this->request->data[$key]["selected_fighter"]+1;
-    			$this->set('selectedFighterData',$this->Fighter->findById($idSelected)["Fighter"]);
-    		}
+                $nameSelected = $names[$this->request->data[$key]["details_fighter"]];
+                $this->set("selectedFighterData",$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
+                //$idSelected = $this->request->data[$key]["details_fighter"]+1;
+            
+            }else if($key=="Fightercreate"){
+                $newFighterName=$this->request->data[$key]["name"];
+                debug($newFighterName);
+                if(in_array($newFighterName,$names)){
+                    debug("Fighter ".$newFighterName." already exists.");
+                }else{
+                    $newFighter=array(
+                        "name"=>$newFighterName,
+                        "player_id"=>$idPlayer,
+                        "coordinate_x"=>0,
+                        "coordinate_y"=>0,
+                        "level"=>3,
+                        "xp"=>0,
+                        "skill_sight"=>0,
+                        "skill_strength"=>1,
+                        "skill_health"=>3,
+                        "current_health"=>3);
+
+                    $this->Fighter->create($newFighter);
+                    $this->Fighter->save();
+                }
+                
+            }
     	}
     }
     
