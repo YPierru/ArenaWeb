@@ -5,10 +5,10 @@ App::uses('AppModel', 'Model');
 class Fighter extends AppModel {
     public $displayField = 'name';
     public $belongsTo = array('Player' => array(
-                                                'className' => 'Player',
-                                                'foreignKey' => 'player_id'
-                                                ),
-                            );
+        'className' => 'Player',
+        'foreignKey' => 'player_id'
+        ),
+    );
 
 
 
@@ -24,45 +24,45 @@ class Fighter extends AppModel {
         /**
          * Change coo of the fighter according to direction and arena limit
          */
-    	if(strcmp($direction,"east")==0){
-    		if($myFighter["Fighter"]["coordinate_x"]<15){
-    			$myFighter["Fighter"]["coordinate_x"]++;
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+        if(strcmp($direction,"east")==0){
+          if($myFighter["Fighter"]["coordinate_x"]<15){
+             $myFighter["Fighter"]["coordinate_x"]++;
+         }else{
+             $errorMessage+="Arena limits reach\n";
+         }
 
-    	}else if(strcmp($direction,"west")==0){
-    		if($myFighter["Fighter"]["coordinate_x"]>0){
-    			$myFighter["Fighter"]["coordinate_x"]--;
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+     }else if(strcmp($direction,"west")==0){
+      if($myFighter["Fighter"]["coordinate_x"]>0){
+         $myFighter["Fighter"]["coordinate_x"]--;
+     }else{
+         $errorMessage+="Arena limits reach\n";
+     }
 
-    	}else if(strcmp($direction,"north")==0){
-    		if($myFighter["Fighter"]["coordinate_y"]<10){
-    			$myFighter["Fighter"]["coordinate_y"]++;
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+     }else if(strcmp($direction,"north")==0){
+      if($myFighter["Fighter"]["coordinate_y"]<10){
+         $myFighter["Fighter"]["coordinate_y"]++;
+     }else{
+         $errorMessage+="Arena limits reach\n";
+     }
 
-    	}else if(strcmp($direction,"south")==0){
-    		if($myFighter["Fighter"]["coordinate_y"]>0){
-    			$myFighter["Fighter"]["coordinate_y"]--;
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
-    	}else{
-            $errorMessage+="Invalid direction\n";
-        }
+    }else if(strcmp($direction,"south")==0){
+      if($myFighter["Fighter"]["coordinate_y"]>0){
+         $myFighter["Fighter"]["coordinate_y"]--;
+     }else{
+         $errorMessage+="Arena limits reach\n";
+     }
+    }else{
+        $errorMessage+="Invalid direction\n";
+    }
 
-        if(!empty($errorMessage)){
-            debug($errorMessage);
-        }
+    if(!empty($errorMessage)){
+        debug($errorMessage);
+    }
 
-    	$this->save($myFighter);
+    $this->save($myFighter);
 
     	//debug($this->findById($fighterId));
-    }
+}
     /**
      * Make a given fighter attack in a given direction
      */
@@ -148,77 +148,76 @@ class Fighter extends AppModel {
 
         //Check if there's a fighter in the attack coo
     	if(empty($findFighter)){
-			debug("no fighter here");
-		}else{
-			debug("fighter found");
-
-            //Get the fighter attacked
-			$fighterDef=$findFighter["Fighter"];
-
-			//$randVal=rand(1,20);
-			$randVal=11;
-			$fighterDefLvl=$fighterDef["level"];
-			$fighterAtkLvl=$myFighter["level"];
-
+         debug("no fighter here");
+        }else{
+            debug("fighter found");
+               //Get the fighter attacked
+            $fighterDef=$findFighter["Fighter"];
+        	//$randVal=rand(1,20);
+            $randVal=11;
+            $fighterDefLvl=$fighterDef["level"];
+            $fighterAtkLvl=$myFighter["level"];
             //Check if attack successed
-			if($randVal>(10+($fighterDefLvl-$fighterAtkLvl))){
-                debug("attack successed");
-
+            if($randVal>(10+($fighterDefLvl-$fighterAtkLvl))){
+               debug("attack successed");
                 //change XP of the attacker and health of the attacked
-				$myFighter["xp"]++;
-				$fighterDef["current_health"]-=$myFighter["skill_strength"];
-
+               $myFighter["xp"]++;
+               $fighterDef["current_health"]-=$myFighter["skill_strength"];
                 //Reset attacked fighter health if negative/zero
                 //up XP of the attacker
-				if($fighterDef["current_health"]<=0){
-					$fighterDef["current_health"]=0;
-                    $myFighter["xp"]+=$fighterDefLvl;
+               if($fighterDef["current_health"]<=0){
+                  $fighterDef["current_health"]=0;
+                  $myFighter["xp"]+=$fighterDefLvl;
+               }
 
-                    /*while($myFighter["xp"]>=4){
-                        
-                        $myFighter["level"]++;
-                        $myFighter["xp"]-=4;
-                    }*/
-				}
-			}else{
-                debug("attack failed");
+            }else{
+               debug("attack failed");
             }
-		}
+        }
 
-		$this->save($myFighter);
-		$this->save($fighterDef);
+        $this->save($myFighter);
+        $this->save($fighterDef);
     }
 
-    /**
-     * Create a map given the attributes of the fighter
-     */
-    public function fView($fighterID){
-        $ToolM = ClassRegistry::init('Tool');
-        $myFighter=$this->findById($fighterID)["Fighter"];
-        $view = $myFighter["skill_sight"];
-    	$cooX=$myFighter["coordinate_x"];
-    	$cooY=$myFighter["coordinate_y"];
-        $map=[];
-        $listFighter = $this->find("all");
-        $listTool = $ToolM->find("all");
-        foreach($listFighter as $fighter){
-            $tempX=$fighter["Fighter"]["coordinate_x"];
-            $tempY=$fighter["Fighter"]["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
-                $map[$tempX][$tempY]["fighter"]= $fighter;
-            }
+    public function createFighter($newName){
+        //$_SESSION["id_player"]->use this instead of id hardcode
+        $newFighter=array(
+            "name"=>$newName,
+            "player_id"=>"545f827c-576c-4dc5-ab6d-27c33186dc3e",
+            "coordinate_x"=>0,
+            "coordinate_y"=>0,
+            "level"=>3,
+            "xp"=>0,
+            "skill_sight"=>0,
+            "skill_strength"=>1,
+            "skill_health"=>3,
+            "current_health"=>3);
+
+        $this->create($newFighter);
+        $this->save();
+
+    }
+
+
+    public function lvlUpFighter($upType){
+        $fighter=$this->find('first', array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))["Fighter"];
+        debug($fighter);
+
+        if($upType=="uphealth"){
+            $fighter["skill_health"]++;
+        }elseif($upType=="upsight"){
+            $fighter["skill_sight"]++;
+        }elseif($upType=="upstrength"){
+            $fighter["skill_strength"]++;
         }
-        foreach($listTool as $Tool){
-            $tempX=$Tool["coordinate_x"];
-            $tempY=$Tool["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $ccoY + $view){
-                $map[$tempX][$tempY]["tool"]= $Tool;
-            }           
-        }
-        return $map;
+
+        $fighter["xp"]=$fighter["xp"]-3;
+        $fighter["level"]++;
+        $this->save($fighter);
+        debug($this->find('first', array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))["Fighter"]);
     }
 }
 
-    
+
 
 ?>
