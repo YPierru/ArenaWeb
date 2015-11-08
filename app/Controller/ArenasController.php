@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class ArenasController extends AppController
 {
 
-	public $uses = array('Player', 'Fighter', 'Event');
+	public $uses = array('Player', 'Fighter', 'Event','Tool');
     public $helpers = array('Js' => array('Jquery'));
 
     /**
@@ -25,8 +25,41 @@ class ArenasController extends AppController
     /**
      * [login description]
      * @return [type] [description]
+     * 
+     *  $this->Auth->user('nom_du_champ')
      */
     public function login(){
+        
+        if($this->request->is("post")){
+
+    		$key=key($this->request->data);
+			//debug($key);
+
+    		if($key=="AddPlayer"){
+
+                    $newEmail = $this->request->data[$key]["email"];
+                    $newPassWord = $this->request->data[$key]["password"];
+                    if(empty($newEmail) || empty($newPassWord)){
+                      debug("Les champs doivent être remplis.");
+                    }else{
+                        $this->Player->createPlayer($newEmail,$newEmail,$newPassWord);
+                    }
+                   
+    		}else if($key=="ConnectPlayer"){
+
+                    $actualEmail = $this->request->data[$key]["email"];
+                    $actualPassWord = $this->request->data[$key]["password"];
+                    if(empty($actualEmail) || empty($actualPassWord)){
+                      debug("Les champs doivent être remplis.");
+                    }else{
+                        
+                        $this->Player->connect($actualEmail,$actualPassWord);
+                        //debug($this->Auth->user('id'));
+                    }
+                   
+    		}
+        }
+         
 
     }
 
@@ -35,8 +68,9 @@ class ArenasController extends AppController
      * @return [type] [description]
      */
     public function sight(){
-
         //Move or Attack according to the form
+        $idPlayer="545f827c-576c-4dc5-ab6d-27c33186dc3e";
+
     	if ($this->request->is('post')){
     		$key=key($this->request->data);
 
@@ -48,8 +82,36 @@ class ArenasController extends AppController
 			}
                 
     	}
-        $this->set("map",$this->Fighter->fView(1));
+
+        $this->set("map",$this->createMap($idPlayer));
         $this->set("fighter",$this->Fighter->findById(1)["Fighter"]);
+    }
+
+    private function createMap($idPlayer){
+        $myFighter=$this->Fighter->find('first', array("conditions"=>array("Fighter.Player_id"=>$idPlayer)))["Fighter"];
+        $view=$myFighter["skill_sight"];
+        $cooX=$myFighter["coordinate_x"];
+        $cooY=$myFighter["coordinate_y"];
+        $map=[];
+        $listFighter = $this->Fighter->find("all");
+        $listTool = $this->Tool->find("all");
+
+        foreach($listFighter as $fighter){
+            $tempX=$fighter["Fighter"]["coordinate_x"];
+            $tempY=$fighter["Fighter"]["coordinate_y"];
+            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+                $map[$tempX][$tempY]["fighter"]= $fighter;
+            }
+        }
+        foreach($listTool as $Tool){
+            $tempX=$Tool["Tool"]["coordinate_x"];
+            $tempY=$Tool["Tool"]["coordinate_y"];
+            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+                $map[$tempX][$tempY]["tool"]= $Tool;
+            }           
+        }
+
+        return $map;
     }
 
     /**
@@ -57,24 +119,11 @@ class ArenasController extends AppController
      * @return [type] [description]
      */
     public function fighter(){
+        session_start();
     	//First player
     	$idPlayer="545f827c-576c-4dc5-ab6d-27c33186dc3e";
 
-        //retrieve all fighters for this player
-    	$allFighterNames=$this->Fighter->find('all', array("conditions"=>array("Fighter.Player_id"=>$idPlayer),
-    														"fields"   =>array("Fighter.name")));
-    	//push the fighter's name in an array
-    	foreach($allFighterNames as $fighter){
-    		$names[]=$fighter["Fighter"]["name"];
-    	}
-
-        //send to view
-    	$this->set('names',$names);
-
-        //at first loading, a fighter is not selected
-        $this->set('selection',false);
-    	//$this->set('selectedFighterData',$this->Fighter->findById(1)["Fighter"]);
-
+        $names=$this->sendArrayNamesToView($idPlayer);
 
     	if($this->request->is("post")){
 
@@ -86,7 +135,6 @@ class ArenasController extends AppController
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
                 $_SESSION["nameFighterSelected"]=$nameSelected;
                 $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
-                
 
     		}else if($key=="Fighterdetails"){
                 $this->set('selection',true);
@@ -96,28 +144,46 @@ class ArenasController extends AppController
             
             }else if($key=="Fightercreate"){
                 $newFighterName=$this->request->data[$key]["name"];
-                debug($newFighterName);
-                if(in_array($newFighterName,$names)){
+
+                if(empty($newFighterName)){
+                    debug("Your fighter must have a name");
+                }
+                elseif(in_array($newFighterName,$names)){
                     debug("Fighter ".$newFighterName." already exists.");
                 }else{
-                    $newFighter=array(
-                        "name"=>$newFighterName,
-                        "player_id"=>$idPlayer,
-                        "coordinate_x"=>0,
-                        "coordinate_y"=>0,
-                        "level"=>3,
-                        "xp"=>0,
-                        "skill_sight"=>0,
-                        "skill_strength"=>1,
-                        "skill_health"=>3,
-                        "current_health"=>3);
-
-                    $this->Fighter->create($newFighter);
-                    $this->Fighter->save();
+                    $this->Fighter->createFighter($newFighterName);
+                    $this->sendArrayNamesToView($idPlayer);
                 }
                 
+            }else if($key=="lvlupform"){
+                $upType=$this->request->data[$key]['type'];
+                $this->Fighter->lvlUpFighter($upType);
             }
     	}
+
+        if(!empty($_SESSION["nameFighterSelected"])){
+            $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))['Fighter']['xp'];
+            if($fighterXP>3){
+                $this->set('levelUpEnable',true);
+            }
+        }
+    }
+
+    private function sendArrayNamesToView($idPlayer){
+        if(isset($names)){
+            unset($names);
+        }
+
+        $allFighterNames=$this->Fighter->find('all', array("conditions"=>array("Fighter.Player_id"=>$idPlayer),
+                                                                        "fields"   =>array("Fighter.name")));
+        //push the fighter's name in an array
+        foreach($allFighterNames as $fighter){
+            $names[]=$fighter["Fighter"]["name"];
+        }
+
+        //send to view
+        $this->set('names',$names);
+        return $names;
     }
     
     /**
