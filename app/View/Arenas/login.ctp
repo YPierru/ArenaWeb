@@ -1,6 +1,58 @@
-<?php $this->assign('title', 'Login');?>
+<section class="container-fluid" id="section4">
+<div  class="row">
+    <!-- app/View/Users/add.ctp -->
+    <div class="users form">
+    <?php echo $this->Form->create('AddPlayer');?>
+        <fieldset>
+            <legend><?php echo __('Inscrition'); ?></legend>
+            <?php 
+            echo $this->Form->input('email');
+            echo $this->Form->input('password');
+        ?>
+        </fieldset>
+    <?php echo $this->Form->end(__('Ajouter'));?>
+    </div>
+    
+</div>
+    
+    <div  class="row">
+    <!-- app/View/Users/add.ctp -->
+    <div class="users form">
+    <?php echo $this->Form->create('ConnectPlayer');?>
+        <fieldset>
+            <legend><?php echo __('Connection'); ?></legend>
+            <?php 
+            echo $this->Form->input('email');
+            echo $this->Form->input('password');
+            
+           
+        ?>
+        </fieldset>
+    <?php echo $this->Form->end(__('Connection'));?>
+    </div>
+    
+</div>
+</section>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <section id="section4">
     <div class="container v-center">
         <div class="row">
@@ -58,3 +110,4 @@
         </div>
     </div>
 </section>
+-->

@@ -33,7 +33,7 @@
                             <div class="panel-body">
                                 <!--<?php $this->Html->image('img\hero.jpg', array('alt' => 'CakePHP', 'border' => '0')); ?>-->
                                 <img src="img\hero.jpg" class="img-responsive thumbnail center-block ">
-                                <p>Les différents personnages possèdent des caractéristiques différentes en fonction de vos choix.</p>
+                                <p>Les différents personnages possèdent des caractéristiques différentes en fonction de vous.</p>
                                 <hr>GO
                                 <hr>
                             </div>
@@ -146,7 +146,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/2.jpg">
+                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/5.jpg">
                     </a>
                     <h3 class="text-center"></h3>
                 </div>

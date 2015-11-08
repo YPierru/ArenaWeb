@@ -25,8 +25,41 @@ class ArenasController extends AppController
     /**
      * [login description]
      * @return [type] [description]
+     * 
+     *  $this->Auth->user('nom_du_champ')
      */
     public function login(){
+        
+        if($this->request->is("post")){
+
+    		$key=key($this->request->data);
+			//debug($key);
+
+    		if($key=="AddPlayer"){
+
+                    $newEmail = $this->request->data[$key]["email"];
+                    $newPassWord = $this->request->data[$key]["password"];
+                    if(empty($newEmail) || empty($newPassWord)){
+                      debug("Les champs doivent être remplis.");
+                    }else{
+                        $this->Player->createPlayer($newEmail,$newEmail,$newPassWord);
+                    }
+                   
+    		}else if($key=="ConnectPlayer"){
+
+                    $actualEmail = $this->request->data[$key]["email"];
+                    $actualPassWord = $this->request->data[$key]["password"];
+                    if(empty($actualEmail) || empty($actualPassWord)){
+                      debug("Les champs doivent être remplis.");
+                    }else{
+                        
+                        $this->Player->connect($actualEmail,$actualPassWord);
+                        //debug($this->Auth->user('id'));
+                    }
+                   
+    		}
+        }
+         
 
     }
 
