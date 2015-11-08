@@ -45,7 +45,7 @@ class Player extends AppModel {
     
         public function createPlayer($newID,$newEmail,$newPassWord){
         //$_SESSION["id_player"]->use this instead of id hardcode
-       //$this->Flash->success(__('Start creat'));
+        //$this->Flash->success(__('Start creat'));
             $newPlayer=array(
             "id"=>$newID,
             "email"=>$newEmail,
