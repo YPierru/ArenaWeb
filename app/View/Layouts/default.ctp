@@ -56,7 +56,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				</div>
 				<div class="navbar-collapse collapse" id="navbar-collapsible">
 					<ul class="nav navbar-nav navbar-left">
-                                                <li><?php echo $this->Html->link('Welcome', array('controller' => 'Arenas', 'action' => 'index')); ?></li>
+                                                <li><?php echo $this->Html->link('Welcome', array('controller' => 'Arenas', 'action' => '/')); ?></li>
 						<li><?php echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'login')); ?></li>
 						<li><?php echo $this->Html->link('Fighters', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
 						<li><?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></li>

@@ -69,26 +69,66 @@ class ArenasController extends AppController
      */
     public function sight(){
         //Move or Attack according to the form
-        $idPlayer="545f827c-576c-4dc5-ab6d-27c33186dc3e";
+        $_SESSION["idFighterSelected"]=1;
 
     	if ($this->request->is('post')){
     		$key=key($this->request->data);
 
 			if($key=="Fightermove"){
-    			$this->Fighter->doMove(1, $this->request->data[$key]['direction']);
+    			$this->Fighter->doMove($this->request->data[$key]['direction']);
 
 			}else if($key=="Fighterattack"){
-				$this->Fighter->doAttack(1, $this->request->data[$key]['direction']);
-			}
+				$this->Fighter->doAttack($this->request->data[$key]['direction']);
+			}else if($key=="lvlupform"){
+                $upType=$this->request->data[$key]['type'];
+                $this->Fighter->lvlUpFighter($upType);
+            }else if(1=="pickStuff"){
+                $listTools=$this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$_SESSION["idFighterSelected"])));
+               
+                //debug("\n\n\n\n\n\n\n\n\n\n");
+                //debug($listTools);
+                //debug($toolFound);
+                $typeToolFound=$toolFound["type"];
+                foreach ($listTools as $value) {
+                    if($typeToolFound==$value["Tool"]["type"]){
+                        $this->Tool->dropTool($value["Tool"]);
+                    }
+                }
+                $this->Tool->giveToFighter($toolFound);
+               
+            }
                 
     	}
 
-        $this->set("map",$this->createMap($idPlayer));
-        $this->set("fighter",$this->Fighter->findById(1)["Fighter"]);
+        $toolFound=$this->isFighterOnTool();
+        if(!empty($toolFound)){
+            $this->set("tool",$toolFound);
+        }
+
+        
+        if(!empty($_SESSION["idFighterSelected"])){
+            $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))['Fighter']['xp'];
+            if($fighterXP>3){
+                $this->set('levelUpEnable',true);
+            }
+        }
+
+        $this->set("map",$this->createMap());
+        $this->set("fighter",$this->Fighter->findById($_SESSION["idFighterSelected"])["Fighter"]);
     }
 
-    private function createMap($idPlayer){
-        $myFighter=$this->Fighter->find('first', array("conditions"=>array("Fighter.Player_id"=>$idPlayer)))["Fighter"];
+    private function isFighterOnTool(){
+        $cooX=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"]["coordinate_x"];
+        $cooY=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"]["coordinate_y"];
+
+        $tool=$this->Tool->find('first', array("conditions"=>array("Tool.coordinate_x"=>$cooX,"Tool.coordinate_y"=>$cooY,"Tool.fighter_id"=>null)))["Tool"];
+
+        return $tool;
+    }
+
+    private function createMap(){
+        $_SESSION["idFighterSelected"]=1;
+        $myFighter=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
         $view=$myFighter["skill_sight"];
         $cooX=$myFighter["coordinate_x"];
         $cooY=$myFighter["coordinate_y"];
@@ -107,7 +147,9 @@ class ArenasController extends AppController
             $tempX=$Tool["Tool"]["coordinate_x"];
             $tempY=$Tool["Tool"]["coordinate_y"];
             if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
-                $map[$tempX][$tempY]["tool"]= $Tool;
+                if($Tool["Tool"]["fighter_id"]==null){
+                    $map[$tempX][$tempY]["tool"]= $Tool;
+                }
             }           
         }
 
@@ -133,14 +175,15 @@ class ArenasController extends AppController
     		if($key=="Fighterselect"){
                 //Send fighter data to the view
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
-                $_SESSION["nameFighterSelected"]=$nameSelected;
-                $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
+                $_SESSION["idFighterSelected"]=$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"];
+                $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"]);
 
     		}else if($key=="Fighterdetails"){
                 $this->set('selection',true);
                 $nameSelected = $names[$this->request->data[$key]["details_fighter"]];
                 $this->set("selectedFighterData",$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
-                //$idSelected = $this->request->data[$key]["details_fighter"]+1;
+                $idFighterDetails = $this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"];
+                $this->set("actualStuff", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterDetails))));
             
             }else if($key=="Fightercreate"){
                 $newFighterName=$this->request->data[$key]["name"];
@@ -152,22 +195,14 @@ class ArenasController extends AppController
                     debug("Fighter ".$newFighterName." already exists.");
                 }else{
                     $this->Fighter->createFighter($newFighterName);
-                    $this->sendArrayNamesToView($idPlayer);
+                    $names=$this->sendArrayNamesToView($idPlayer);
                 }
                 
-            }else if($key=="lvlupform"){
-                $upType=$this->request->data[$key]['type'];
-                $this->Fighter->lvlUpFighter($upType);
             }
     	}
-
-        if(!empty($_SESSION["nameFighterSelected"])){
-            $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))['Fighter']['xp'];
-            if($fighterXP>3){
-                $this->set('levelUpEnable',true);
-            }
-        }
     }
+
+
 
     private function sendArrayNamesToView($idPlayer){
         if(isset($names)){

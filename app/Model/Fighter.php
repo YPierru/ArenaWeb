@@ -15,9 +15,10 @@ class Fighter extends AppModel {
     /**
      * Move a given fighter in a given direction
      */
-    public function doMove($fighterId, $direction){
+    public function doMove($direction){
         //Retrieve the fighter
-    	$myFighter=$this->findById($fighterId);
+      $_SESSION["idFighterSelected"]=1;
+    	$myFighter=$this->findById($_SESSION["idFighterSelected"]);
 
     	$errorMessage="";
 
@@ -66,9 +67,10 @@ class Fighter extends AppModel {
     /**
      * Make a given fighter attack in a given direction
      */
-    public function doAttack($fighterId, $direction){
+    public function doAttack($direction){
         //Retrieve the fighter
-    	$myFighter=$this->findById($fighterId)["Fighter"];
+      $_SESSION["idFighterSelected"]=1;
+    	$myFighter=$this->findById($_SESSION["idFighterSelected"])["Fighter"];
     	$cooX=$myFighter["coordinate_x"];
     	$cooY=$myFighter["coordinate_y"];
 
@@ -198,10 +200,10 @@ class Fighter extends AppModel {
 
     }
 
-
     public function lvlUpFighter($upType){
-        $fighter=$this->find('first', array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))["Fighter"];
-        debug($fighter);
+        $_SESSION["idFighterSelected"]=1;
+        $fighter=$this->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
+        //debug($fighter);
 
         if($upType=="uphealth"){
             $fighter["skill_health"]++;
@@ -214,7 +216,7 @@ class Fighter extends AppModel {
         $fighter["xp"]=$fighter["xp"]-3;
         $fighter["level"]++;
         $this->save($fighter);
-        debug($this->find('first', array("conditions"=>array("Fighter.name"=>$_SESSION["nameFighterSelected"])))["Fighter"]);
+        //debug($this->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"]);
     }
 }
 
