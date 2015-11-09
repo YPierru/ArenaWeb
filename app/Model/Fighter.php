@@ -68,8 +68,8 @@ class Fighter extends AppModel {
      * Make a given fighter attack in a given direction
      */
     public function doAttack($direction){
-        //Retrieve the fighter
-      $_SESSION["idFighterSelected"]=1;
+        //Retrieve the fighter-
+      $_SESSION["idFighterSelected"]=1;-
     	$myFighter=$this->findById($_SESSION["idFighterSelected"])["Fighter"];
     	$cooX=$myFighter["coordinate_x"];
     	$cooY=$myFighter["coordinate_y"];
@@ -170,6 +170,8 @@ class Fighter extends AppModel {
                if($fighterDef["current_health"]<=0){
                   $fighterDef["current_health"]=0;
                   $myFighter["xp"]+=$fighterDefLvl;
+                  $this->save($fighterDef);
+                  $this->destroyFighter($fighterDef["id"]);
                }
 
             }else{
@@ -178,7 +180,6 @@ class Fighter extends AppModel {
         }
 
         $this->save($myFighter);
-        $this->save($fighterDef);
     }
 
     public function createFighter($newName){
@@ -198,6 +199,10 @@ class Fighter extends AppModel {
         $this->create($newFighter);
         $this->save();
 
+    }
+    
+    public function destroyFighter($figtherId){
+        $this->Fighter->delete($fighterId, $false);
     }
 
     public function lvlUpFighter($upType){

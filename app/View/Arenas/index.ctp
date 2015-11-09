@@ -31,8 +31,7 @@
                             <div class="panel-heading">
                             <h3>Personnage</h3></div>
                             <div class="panel-body">
-                                <!--<?php $this->Html->image('img\hero.jpg', array('alt' => 'CakePHP', 'border' => '0')); ?>-->
-                                <img src="img\hero.jpg" class="img-responsive thumbnail center-block ">
+                                <?php echo $this->Html->image('hero.jpg', array( 'class' => 'img-responsive thumbnail center-block '));?>
                                 <p>Les différents personnages possèdent des caractéristiques différentes en fonction de vous.</p>
                                 <hr>GO
                                 <hr>
@@ -48,7 +47,7 @@
                             <div class="panel-heading">
                             <h3>Carte</h3></div>
                             <div class="panel-body">
-                                <img src="img\damier.png" class="img-responsive thumbnail center-block ">
+                                <?php echo $this->Html->image('damier.png', array( 'class' => 'img-responsive thumbnail center-block '));?>
                                 <p>La carte possedent différents objets qui permettent de s'améliorer.</p>
                                 <hr>GO
                                 <hr>
@@ -64,7 +63,7 @@
                             <div class="panel-heading">
                             <h3>Jeu</h3></div>
                             <div class="panel-body">
-                                <img src="img\lolpetit.jpg" class="img-responsive thumbnail center-block ">
+                                <?php echo $this->Html->image('lolpetit.jpg', array( 'class' => 'img-responsive thumbnail center-block '));?>
                                 <p>A chaque tour, vous pouvez attaquer ou vous déplacer.</p>
                                 <hr>GO
                                 <hr>
@@ -88,7 +87,7 @@
             <div class="col-sm-2 col-sm-offset-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/1.jpg">
+                        <?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -96,7 +95,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/2.jpg">
+                        <?php echo $this->Html->image('2.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -104,7 +103,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/3.jpg">
+                        <?php echo $this->Html->image('3.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -112,7 +111,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/4.jpg">
+                        <?php echo $this->Html->image('4.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -122,7 +121,7 @@
             <div class="col-sm-2 col-sm-offset-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/5.jpg">
+                        <?php echo $this->Html->image('5.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -130,7 +129,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/6.jpg">
+                        <?php echo $this->Html->image('6.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -138,7 +137,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/1.jpg">
+                        <?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -146,7 +145,7 @@
             <div class="col-sm-2 col-xs-6">
                 <div class="text-center">
                     <a href="">
-                        <img style="width:100px;" class="img-circle img-responsive img-thumbnail" src="img/5.jpg">
+                        <?php echo $this->Html->image('5.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>
                     </a>
                     <h3 class="text-center"></h3>
                 </div>
@@ -169,7 +168,7 @@
             </div>
             <br>
             <p class="text-center">
-                <img src="img/lol.jpg" class="img-responsive thumbnail center-block ">
+                  <?php echo $this->Html->image('lol.jpg', array( 'class' => 'img-responsive thumbnail center-block'));?>               
             </p>
         </div>
     </div>
