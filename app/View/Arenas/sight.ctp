@@ -1,6 +1,6 @@
 <?php $this->assign('title', 'Sight');?>
 <!--<?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>-->
-<section class="container-fluid" id="section4">
+<section class="container-fluid" id="section8">
     
     <div class="row">
             <div class="col-sm-8 ">
@@ -13,7 +13,7 @@
 						echo($fighter['coordinate_y']);
 						echo(']');
 						
-						for ($i = 1; $i <= 15; $i++) {
+						for ($i = 15; $i >= 1; $i--) {
 							echo("<div class=\"row\">");
 							
 							for ($j = 1; $j <= 30; $j++) {
@@ -24,8 +24,9 @@
 									}else{/*si c'est un autre*/
 										echo $this->Html->image('autre.png');
 									}
-								}
-								else{/*case vide*/
+								}else if(isset($map[$j][$i]['tool']['Tool']['id'])){
+										echo $this->Html->image('tool.png');
+								}else{/*case vide*/
 									echo $this->Html->image('case.png');
 								}
 							}
