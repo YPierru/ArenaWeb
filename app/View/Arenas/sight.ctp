@@ -2,24 +2,33 @@
 <!--<?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>-->
 <section class="container-fluid" id="section8">
     
+    <?php $player = $this->Session->read('User');
+        
+    debug($player);
+    debug($this->Session->read('User.fighter'))
+    ?>
+    
     <div class="row">
             <div class="col-sm-8 ">
 				<div class="row">
 					<div class="col-sm-10 col-md-offset-1">
 						<?php
+                                                debug($fighter);
 						echo('[');
 						 echo($fighter['coordinate_x']);
 						 echo(':');
 						echo($fighter['coordinate_y']);
 						echo(']');
 						
-						for ($i = 15; $i >= 1; $i--) {
+						for ($i = 9; $i >= 0; $i--) {
 							echo("<div class=\"row\">");
 							
-							for ($j = 1; $j <= 30; $j++) {
+							for ($j = 0; $j <= 14; $j++) {
 								if(isset($map[$j][$i]['fighter']['Fighter']['name'])){
 									/*si c'est notre fighter*/
+                                                                    
 									if($j == $fighter['coordinate_x'] && $i == $fighter['coordinate_y']){
+                                                                           
 										echo $this->Html->image('fighter.png');
 									}else{/*si c'est un autre*/
 										echo $this->Html->image('autre.png');

@@ -9,6 +9,7 @@
 class UsersController extends AppController {
 
     var $name = 'Users';
+    public $uses = array('Fighter','User');
    // var $components = array('Auth'); // Pas nécessaire si déclaré dans votre contrôleur app
 
     /**
@@ -16,21 +17,32 @@ class UsersController extends AppController {
     * pour le login, donc vous pouvez laisser cette fonction vide.
     */
     public function login() {
-                    if ($this->request->is('post')) {
-                        //we need to change the request->data indexes to make everything work
-                        if (isset($this->request->data['Login'] /*that's the name we gave to the form*/)) {
-                            $this->request->data['User'] = $this->request->data['Login'];
-                            unset($this->request->data['Login']); //clean everything up so all work as it is working now
-                            $this->set('formName', 'Login'); //we need to pass a reference to the view for validation display
-                        } //if there's no 'Login' index, we can assume the request came the normal way
-                    }
+                    
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
+                
+             /*    $key=key($this->request->data);
+                $em = $this->request->data[$key]['email'];
+                $lo = $this->User->find("first",array("conditions"=>array('User.email'=> $em) ));*/
+                $id = $this->Auth->user('id');
+                $fi = $this->Fighter->find("first",array("conditions"=>array("Fighter.player_id" => $id)))["Fighter"]['id'];
+                
+
+                $compte = array('User' =>
+                    array('player' => $id ,'fighter'=> $fi)
+                 );
+                $this->Session->write($compte);
+              return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__("Nom d'user ou mot de passe invalide, réessayer"));
             }
+        
+           
+
+            
+        
         }
+        
     }
     
     function logout() {
@@ -41,9 +53,18 @@ class UsersController extends AppController {
      public function register() {
         if ($this->request->is('post')) {
             $this->User->create();
+            debug("test");
             if ($this->User->save($this->request->data)) {
+                $this->Auth->login();
                 $this->Flash->success(__('L\'user a été sauvegardé'));
-                return $this->redirect(array('action' => 'index'));
+                $id = $this->Auth->user('id');
+                $this->Fighter->createFighter('myFirstFighter',$id);
+                $fi = $this->Fighter->find("first",array("conditions"=>array("Fighter.player_id" => $id)))["Fighter"]['id'];
+                $compte = array('User' =>
+                    array('player' => $id ,'fighter'=> $fi)
+                 );
+                $this->Session->write($compte);
+                return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
             }
@@ -67,37 +88,5 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
-    
-    /*
-    public function createPlayer(){
-        
-        $newEmail = $this->request->data[$key]["email_:"];
-        $newPassWord = $this->request->data[$key]["password_:"];
-                    if(empty($newEmail) || empty($newPassWord)){
-                      debug("Les champs doivent être remplis.");
-                    }else{
-                        $newID = $this->Player->find('count');
-                        $newID = $newID + 1;
-                       // $this->User->createPlayer($total,$newEmail,$newPassWord);
-                        
-                        $newPlayer=array(
-                           "id"=>$newID,
-                           "email"=>$newEmail,
-                           "password"=>$newPassWord
-                           );
-
-                       $this->create($newPlayer);
-
-                       if ($this->save()) {
-                           debug('L\'user a été sauvegardé');
-                           //$this->Flash->success(__('L\'user a été sauvegardé'));
-                       } else {
-                           debug('L\'user n\'a pas été sauvegardé. Merci de réessayer.');
-                          // $this->Flash->error(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
-        }
-                    }
-        
-      
-    }*/
     
 }

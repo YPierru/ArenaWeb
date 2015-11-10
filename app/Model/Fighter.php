@@ -17,8 +17,10 @@ class Fighter extends AppModel {
      */
     public function doMove($direction){
         //Retrieve the fighter
-      $_SESSION["idFighterSelected"]=1;
-    	$myFighter=$this->findById($_SESSION["idFighterSelected"]);
+        
+        App::uses('CakeSession', 'Model/Datasource');
+        $idFighterSelected=CakeSession::read('User.fighter');
+    	$myFighter=$this->findById($idFighterSelected);
 
     	$errorMessage="";
 
@@ -26,7 +28,7 @@ class Fighter extends AppModel {
          * Change coo of the fighter according to direction and arena limit
          */
         if(strcmp($direction,"east")==0){
-          if($myFighter["Fighter"]["coordinate_x"]<15){
+          if($myFighter["Fighter"]["coordinate_x"]<14){
              $myFighter["Fighter"]["coordinate_x"]++;
          }else{
              $errorMessage+="Arena limits reach\n";
@@ -40,7 +42,7 @@ class Fighter extends AppModel {
      }
 
      }else if(strcmp($direction,"north")==0){
-      if($myFighter["Fighter"]["coordinate_y"]<10){
+      if($myFighter["Fighter"]["coordinate_y"]<9){
          $myFighter["Fighter"]["coordinate_y"]++;
      }else{
          $errorMessage+="Arena limits reach\n";
@@ -69,8 +71,9 @@ class Fighter extends AppModel {
      */
     public function doAttack($direction){
         //Retrieve the fighter-
-      $_SESSION["idFighterSelected"]=1;-
-    	$myFighter=$this->findById($_SESSION["idFighterSelected"])["Fighter"];
+        App::uses('CakeSession', 'Model/Datasource');
+        $idFighterSelected=CakeSession::read('User.fighter');
+    	$myFighter=$this->findById($idFighterSelected)["Fighter"];
     	$cooX=$myFighter["coordinate_x"];
     	$cooY=$myFighter["coordinate_y"];
 
@@ -78,7 +81,7 @@ class Fighter extends AppModel {
 
         //Make the fighter attacks according to a direction
     	if(strcmp($direction,"east")==0){
-    		if($cooX<15){
+    		if($cooX<14){
 
     			//debug($this->find('all'));
                 //X coo of the attack
@@ -112,7 +115,7 @@ class Fighter extends AppModel {
     		}
 
     	}else if(strcmp($direction,"north")==0){
-    		if($cooY<15){
+    		if($cooY<9){
 
     			//debug($this->find('all'));
     			$cooYAtk=$cooY+1;
@@ -182,11 +185,15 @@ class Fighter extends AppModel {
         $this->save($myFighter);
     }
 
-    public function createFighter($newName){
-        //$_SESSION["id_player"]->use this instead of id hardcode
+    public function createFighter($newName, $idUser=null){
+        if($idUser==null){
+            App::uses('CakeSession', 'Model/Datasource');
+            $idUser=CakeSession::read('User.player');
+        }
+        debug($idUser);
         $newFighter=array(
             "name"=>$newName,
-            "player_id"=>"545f827c-576c-4dc5-ab6d-27c33186dc3e",
+            "player_id"=>$idUser,
             "coordinate_x"=>0,
             "coordinate_y"=>0,
             "level"=>3,
@@ -202,12 +209,13 @@ class Fighter extends AppModel {
     }
     
     public function destroyFighter($figtherId){
-        $this->Fighter->delete($fighterId, $false);
+        $this->delete($fighterId, $false);
     }
 
     public function lvlUpFighter($upType){
-        $_SESSION["idFighterSelected"]=1;
-        $fighter=$this->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
+        App::uses('CakeSession', 'Model/Datasource');
+        $idFighterSelected=CakeSession::read('User.fighter');
+        $fighter=$this->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"];
         //debug($fighter);
 
         if($upType=="uphealth"){
