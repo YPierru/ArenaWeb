@@ -13,61 +13,73 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 $cakeDescription = __d('cake_dev', 'Arena Web ');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
+    <?php echo $this->Html->charset(); ?>
+    <title>
+        <?php echo $cakeDescription ?>:
+        <?php echo $this->fetch('title'); ?>
+    </title>
+    <?php
+        echo $this->Html->meta('icon');
                 echo $this->Html->css('bootstrap.min.css');
                 echo $this->Html->css('styles.css');
-		echo $this->Html->script('jquery');
+        echo $this->Html->script('jquery');
                 echo $this->Html->script('bootstrap.min.js');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+        echo $this->fetch('meta');
+        echo $this->fetch('css');
+        echo $this->fetch('script');
+    ?>
             
     
 </head>
 <body>
       <div id="header">
                     <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand text-danger" href="#">WebArena</a>
-                                        <!--<?php echo $this->Html->link('WebArena', array('controller' => 'Arenas', 'action' => 'index')); ?>-->
-				</div>
-				<div class="navbar-collapse collapse" id="navbar-collapsible">
-					<ul class="nav navbar-nav navbar-left">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                                        <?php echo $this->Html->link('WebArena', array('controller' => 'Arenas', 'action' => 'index'), array('class'=> 'navbar-brand text-danger')); ?>
+                                        <!--<a class="navbar-brand text-danger" href="#">WebArena</a>
+                                            <?php echo $this->Html->link('WebArena', array('controller' => 'Arenas', 'action' => 'index')); ?>-->
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-collapsible">
+                    <ul class="nav navbar-nav navbar-left">
                                                 <li><?php echo $this->Html->link('Welcome', array('controller' => 'Arenas', 'action' => '/')); ?></li>
-						<li><?php echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'login')); ?></li>
-						<li><?php echo $this->Html->link('Fighters', array('controller' => 'Arenas', 'action' => 'fighter')); ?></li>
-						<li><?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></li>
-						<li><?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></li>
-						<li>&nbsp;</li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-heart-o fa-lg"></i></a></li>
-					</ul>
-				</div>
-			</div>
+                                                <?php
+                                                 if (!($this->Session->read('Auth.User'))){
+                                                    echo('<li>');
+                                                    echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login'));
+                                                    echo('</li>');
+                                                 }
+                                                 if ($this->Session->read('Auth.User')){
+                                                    echo('<li>');
+                                                    echo $this->Html->link('Fighters', array('controller' => 'Arenas', 'action' => 'fighter'));
+                                                    echo('</li> <li>');
+                                                    echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight'));
+                                                    echo('</li> <li>');
+                                                    echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary'));
+                                                    echo('</li> <li>');
+                                                    echo $this->Html->link('Déconnexion', array('controller' => 'Users', 'action' => 'logout'));
+                                                    echo('</li>');
+                                                }?>
+                        <li>&nbsp;</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-heart-o fa-lg"></i></a></li>
+                    </ul>
+                </div>
+            </div>
                     </nav>
           
             </div>
@@ -121,7 +133,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </footer>
 
 <div class="scroll-up">
-	<a href="#"><i class="fa fa-angle-up"></i></a>
+    <a href="#"><i class="fa fa-angle-up"></i></a>
 </div>
 
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

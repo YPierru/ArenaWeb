@@ -1,29 +1,6 @@
 <?php $this->assign('title', 'Sight');?>
-
-<section class="container-fluid" id="section4">
-    <div class="row">
-        <div class="col-sm-6 ">
-            <?php echo $this->Form->create('Fightermove', array(
-            'inputDefaults' => array(
-            'div' => 'form-group',
-            'wrapInput' => false,
-            'class' => 'form-control'
-            ),
-            'class' => 'well'
-            ));
-            ?>
-            <legend>Bouge ton guerrier</legend>
-            <?php
-                echo $this->Form->input('direction',
-                array('options' => array('north'=>'north','south'=>'south','east'=>'east','west'=>'west'),
-                'default' => 'east'));
-            ?>
-            <?php 
-                echo $this->Form->end(array('label' => 'Move', 'class' => 'btn btn-info')); 
-            ?>
-
 <!--<?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>-->
-<section class="container-fluid" id="section4">
+<section class="container-fluid" id="section8">
     
     <div class="row">
             <div class="col-sm-8 ">
@@ -36,7 +13,7 @@
 						echo($fighter['coordinate_y']);
 						echo(']');
 						
-						for ($i = 1; $i <= 15; $i++) {
+						for ($i = 15; $i >= 1; $i--) {
 							echo("<div class=\"row\">");
 							
 							for ($j = 1; $j <= 30; $j++) {
@@ -47,8 +24,9 @@
 									}else{/*si c'est un autre*/
 										echo $this->Html->image('autre.png');
 									}
-								}
-								else{/*case vide*/
+								}else if(isset($map[$j][$i]['tool']['Tool']['id'])){
+										echo $this->Html->image('tool.png');
+								}else{/*case vide*/
 									echo $this->Html->image('case.png');
 								}
 							}
@@ -218,4 +196,3 @@
     </div>
 
 </section>
-
