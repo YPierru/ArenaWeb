@@ -20,26 +20,18 @@ class UsersController extends AppController {
                     
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                
-             /*    $key=key($this->request->data);
-                $em = $this->request->data[$key]['email'];
-                $lo = $this->User->find("first",array("conditions"=>array('User.email'=> $em) ));*/
+
                 $id = $this->Auth->user('id');
-                $fi = $this->Fighter->find("first",array("conditions"=>array("Fighter.player_id" => $id)))["Fighter"]['id'];
                 
 
                 $compte = array('User' =>
-                    array('player' => $id ,'fighter'=> $fi)
+                    array('player' => $id ,'fighter'=> null)
                  );
                 $this->Session->write($compte);
               return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__("Nom d'user ou mot de passe invalide, réessayer"));
-            }
-        
-           
-
-            
+            }    
         
         }
         

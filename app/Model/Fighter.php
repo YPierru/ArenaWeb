@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppModel', 'Model');
+App::uses('Tool', 'Model');
 
 class Fighter extends AppModel {
     public $displayField = 'name';
@@ -20,9 +21,9 @@ class Fighter extends AppModel {
         
         App::uses('CakeSession', 'Model/Datasource');
         $idFighterSelected=CakeSession::read('User.fighter');
-    	$myFighter=$this->findById($idFighterSelected);
+      $myFighter=$this->findById($idFighterSelected);
 
-    	$errorMessage="";
+      $errorMessage="";
 
         /**
          * Change coo of the fighter according to direction and arena limit
@@ -64,7 +65,7 @@ class Fighter extends AppModel {
 
     $this->save($myFighter);
 
-    	//debug($this->findById($fighterId));
+      //debug($this->findById($fighterId));
 }
     /**
      * Make a given fighter attack in a given direction
@@ -73,73 +74,73 @@ class Fighter extends AppModel {
         //Retrieve the fighter-
         App::uses('CakeSession', 'Model/Datasource');
         $idFighterSelected=CakeSession::read('User.fighter');
-    	$myFighter=$this->findById($idFighterSelected)["Fighter"];
-    	$cooX=$myFighter["coordinate_x"];
-    	$cooY=$myFighter["coordinate_y"];
+      $myFighter=$this->findById($idFighterSelected)["Fighter"];
+      $cooX=$myFighter["coordinate_x"];
+      $cooY=$myFighter["coordinate_y"];
 
-    	$errorMessage="";
+      $errorMessage="";
 
         //Make the fighter attacks according to a direction
-    	if(strcmp($direction,"east")==0){
-    		if($cooX<14){
+      if(strcmp($direction,"east")==0){
+        if($cooX<14){
 
-    			//debug($this->find('all'));
+          //debug($this->find('all'));
                 //X coo of the attack
-    			$cooXAtk=$cooX+1;
+          $cooXAtk=$cooX+1;
 
                 //find if there's a fighter on the attack coo
-    			$findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooXAtk,"Fighter.coordinate_y"=>$cooY)));
+          $findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooXAtk,"Fighter.coordinate_y"=>$cooY)));
 
                 //start the attack algorithm
-    			$this->attackProcess($findFighter,$myFighter);
-    			
+          $this->attackProcess($findFighter,$myFighter);
+          
 
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+        }else{
+          $errorMessage+="Arena limits reach\n";
+        }
 
-    		//debug($this->find('all'));
+        //debug($this->find('all'));
 
 
-    	}else if(strcmp($direction,"west")==0){
-    		if($cooX>0){
+      }else if(strcmp($direction,"west")==0){
+        if($cooX>0){
 
-    			//debug($this->find('all'));
-    			$cooXAtk=$cooX-1;
-    			$findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooXAtk,"Fighter.coordinate_y"=>$cooY)));
-    			$this->attackProcess($findFighter,$myFighter);
-    			
+          //debug($this->find('all'));
+          $cooXAtk=$cooX-1;
+          $findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooXAtk,"Fighter.coordinate_y"=>$cooY)));
+          $this->attackProcess($findFighter,$myFighter);
+          
 
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+        }else{
+          $errorMessage+="Arena limits reach\n";
+        }
 
-    	}else if(strcmp($direction,"north")==0){
-    		if($cooY<9){
+      }else if(strcmp($direction,"north")==0){
+        if($cooY<9){
 
-    			//debug($this->find('all'));
-    			$cooYAtk=$cooY+1;
-    			$findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooX,"Fighter.coordinate_y"=>$cooYAtk)));
-    			$this->attackProcess($findFighter,$myFighter);
-    			
+          //debug($this->find('all'));
+          $cooYAtk=$cooY+1;
+          $findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooX,"Fighter.coordinate_y"=>$cooYAtk)));
+          $this->attackProcess($findFighter,$myFighter);
+          
 
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
+        }else{
+          $errorMessage+="Arena limits reach\n";
+        }
 
-    	}else if(strcmp($direction,"south")==0){
-    		if($cooY>0){
+      }else if(strcmp($direction,"south")==0){
+        if($cooY>0){
 
-    			//debug($this->find('all'));
-    			$cooYAtk=$cooY-1;
-    			$findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooX,"Fighter.coordinate_y"=>$cooYAtk)));
-    			$this->attackProcess($findFighter,$myFighter);
-    			
+          //debug($this->find('all'));
+          $cooYAtk=$cooY-1;
+          $findFighter=$this->find('first', array('conditions'=>array( "Fighter.coordinate_x"=>$cooX,"Fighter.coordinate_y"=>$cooYAtk)));
+          $this->attackProcess($findFighter,$myFighter);
+          
 
-    		}else{
-    			$errorMessage+="Arena limits reach\n";
-    		}
-    	}else{
+        }else{
+          $errorMessage+="Arena limits reach\n";
+        }
+      }else{
             $errorMessage+="Invalid direction\n";
         }
 
@@ -152,13 +153,13 @@ class Fighter extends AppModel {
     private function attackProcess($findFighter, $myFighter){
 
         //Check if there's a fighter in the attack coo
-    	if(empty($findFighter)){
+      if(empty($findFighter)){
          debug("no fighter here");
         }else{
             debug("fighter found");
                //Get the fighter attacked
             $fighterDef=$findFighter["Fighter"];
-        	//$randVal=rand(1,20);
+          //$randVal=rand(1,20);
             $randVal=11;
             $fighterDefLvl=$fighterDef["level"];
             $fighterAtkLvl=$myFighter["level"];
@@ -170,11 +171,15 @@ class Fighter extends AppModel {
                $fighterDef["current_health"]-=$myFighter["skill_strength"];
                 //Reset attacked fighter health if negative/zero
                 //up XP of the attacker
+                $this->save($fighterDef);
                if($fighterDef["current_health"]<=0){
+
+                  debug("fighter def is dead");
                   $fighterDef["current_health"]=0;
                   $myFighter["xp"]+=$fighterDefLvl;
-                  $this->save($fighterDef);
-                  $this->destroyFighter($fighterDef["id"]);
+                  $toolModel=new Tool();
+                  $toolModel->releaseItem($fighterDef["id"]);
+                  //$this->destroyFighter($fighterDef["id"]);
                }
 
             }else{
@@ -208,8 +213,8 @@ class Fighter extends AppModel {
 
     }
     
-    public function destroyFighter($figtherId){
-        $this->delete($fighterId, $false);
+    public function destroyFighter($fighterId){
+        $this->delete($fighterId, false);
     }
 
     public function lvlUpFighter($upType){

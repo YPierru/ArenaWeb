@@ -25,8 +25,8 @@
                     
                     
                   <?php 
-                    if(!empty($_SESSION["idFighterSelected"])){
-                        if(isset($currentFighter)){   
+                    if($this->Session->read("User.fighter")!=null){
+                        if(isset($currentFighter) && isset($actualStuff)){   
                         ?>
                             
 				<legend>
@@ -101,6 +101,9 @@
                           
                     
                     <?php
+                    	pr($actualStuff);
+				
+
                             }
                     }else{
                             echo "No fighter selected";
@@ -134,7 +137,7 @@
 
             
                 
-				<?php if(isset($selectedFighterData) && isset($actualStuff)){?>
+				<?php if(isset($selectedFighterData) && isset($actualStuffDetails)){?>
 				<legend>
 						   <?php echo($selectedFighterData["name"]);?>
 						Lvl. <?php echo($selectedFighterData["level"]);?>
@@ -205,7 +208,7 @@
 						</div>
 						
                 <?php
-						pr($actualStuff);
+						pr($actualStuffDetails);
 				
 				}
                 ?>

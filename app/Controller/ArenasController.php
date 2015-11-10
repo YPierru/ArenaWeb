@@ -29,64 +29,67 @@ class ArenasController extends AppController
         //Move or Attack according to the form
         $idFighterSelected=$this->Session->read("User.fighter");
 
-    	if ($this->request->is('post')){
-    		$key=key($this->request->data);
-
-                if($key=="Fightermove"){
-                    $this->Fighter->doMove($this->request->data[$key]['direction']);
-
-                }else if($key=="Fighterattack"){
-                    $this->Fighter->doAttack($this->request->data[$key]['direction']);
-                }else if($key=="lvlupform"){
-                    $upType=$this->request->data[$key]['type'];
-                    $this->Fighter->lvlUpFighter($upType);
-            }else if(1=="pickStuff"){
-                $listTools=$this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterSelected)));
-               
-                //debug("\n\n\n\n\n\n\n\n\n\n");
-                //debug($listTools);
-                //debug($toolFound);
-                $typeToolFound=$toolFound["type"];
-                foreach ($listTools as $value) {
-                    if($typeToolFound==$value["Tool"]["type"]){
-                        $this->Tool->dropTool($value["Tool"]);
-                    }
-                }
-                $this->Tool->giveToFighter($toolFound);
-               
-            }
-                
-    	}
-
         $toolFound=$this->isFighterOnTool($idFighterSelected);
         if(!empty($toolFound)){
             $this->set("tool",$toolFound);
         }
 
-        
-        if(!empty($idFighterSelected)){
-            $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.id"=>$idFighterSelected)))['Fighter']['xp'];
-            if($fighterXP>3){
-                $this->set('levelUpEnable',true);
-            }
-        }
+        if($idFighterSelected!=null){
+            $this->set('fighterIsSelected', true);
+        	if ($this->request->is('post')){
+        		$key=key($this->request->data);
 
-        $this->set("map",$this->createMap());
-        $this->set("fighter",$this->Fighter->findById($idFighterSelected)["Fighter"]);
+                    if($key=="Fightermove"){
+                        $this->Fighter->doMove($this->request->data[$key]['direction']);
+
+                    }else if($key=="Fighterattack"){
+                        $this->Fighter->doAttack($this->request->data[$key]['direction']);
+                    }else if($key=="lvlupform"){
+                        $upType=$this->request->data[$key]['type'];
+                        $this->Fighter->lvlUpFighter($upType);
+                }else if($key=="pickStuff"){
+                    $listTools=$this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterSelected)));
+
+                    $typeToolFound=$toolFound["type"];
+                    foreach ($listTools as $value) {
+                        if($typeToolFound==$value["Tool"]["type"]){
+                            $this->Tool->dropTool($value["Tool"]);
+                        }
+                    }
+                    $this->Tool->giveToFighter($toolFound);
+                    
+                    $this->set("tool",null);
+                   
+                }
+                    
+        	}
+
+            
+            if(!empty($idFighterSelected)){
+                $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.id"=>$idFighterSelected)))['Fighter']['xp'];
+                if($fighterXP>3){
+                    $this->set('levelUpEnable',true);
+                }
+            }
+
+            $this->set("map",$this->createMap());
+            $this->set("fighter",$this->Fighter->findById($idFighterSelected)["Fighter"]);
+        }else{
+            $this->set('fighterIsSelected', false);
+        }
     }
 
     private function isFighterOnTool($idFighterSelected){
         $cooX=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"]["coordinate_x"];
         $cooY=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"]["coordinate_y"];
 
-        $tool=$this->Tool->find('first', array("conditions"=>array("Tool.coordinate_x"=>$cooX,"Tool.coordinate_y"=>$cooY,"Tool.fighter_id"=>null)))["Tool"];
+        $tool=$this->Tool->find('first', array("conditions"=>array("Tool.coordinate_x"=>($cooX),"Tool.coordinate_y"=>($cooY),"Tool.fighter_id"=>null)))["Tool"];
 
         return $tool;
     }
 
     private function createMap(){
-        $_SESSION["idFighterSelected"]=1;
-        $myFighter=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
+        $myFighter=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$this->Session->read("User.fighter"))))["Fighter"];
         $view=$myFighter["skill_sight"];
         $cooX=$myFighter["coordinate_x"];
         $cooY=$myFighter["coordinate_y"];
@@ -124,6 +127,12 @@ class ArenasController extends AppController
 
         $names=$this->sendArrayNamesToView($idPlayer);
 
+        if($this->Session->read("User.fighter")){
+            $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$this->Session->read("User.fighter"))))["Fighter"]);
+            $this->set("actualStuff", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$this->Session->read("User.fighter")))));
+        }
+
+        
     	if($this->request->is("post")){
 
     		$key=key($this->request->data);
@@ -134,14 +143,13 @@ class ArenasController extends AppController
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
                 $idFighterSelected=$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"];
                 $this->Session->write("User.fighter",$idFighterSelected);
-                $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"]);
-
-    		}else if($key=="Fighterdetails"){
+    		
+            }else if($key=="Fighterdetails"){
                 $this->set('selection',true);
                 $nameSelected = $names[$this->request->data[$key]["details_fighter"]];
                 $this->set("selectedFighterData",$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected)))["Fighter"]);
                 $idFighterDetails = $this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"];
-                $this->set("actualStuff", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterDetails))));
+                $this->set("actualStuffDetails", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterDetails))));
             
             }else if($key=="Fightercreate"){
                 $newFighterName=$this->request->data[$key]["name"];

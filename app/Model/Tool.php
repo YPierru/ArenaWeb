@@ -6,12 +6,13 @@ App::uses('Fighter', 'Model');
 class Tool extends AppModel {
     
     public function giveToFighter($toolFound){
-        $_SESSION["idFighterSelected"]=1;
-    	$toolFound["fighter_id"]=$_SESSION["idFighterSelected"];
+        App::uses('CakeSession', 'Model/Datasource');
+        $idFighterSelected=CakeSession::read('User.fighter')['id'];
+    	$toolFound["fighter_id"]=$idFighterSelected;
     	$this->save($toolFound);
     	
         $fighterModel=new Fighter();
-        $currentFighter = $fighterModel->find("first",array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
+        $currentFighter = $fighterModel->find("first",array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"];
         $toolType=$toolFound["type"];
         $toolBonus=$toolFound["bonus"];
 
@@ -31,12 +32,14 @@ class Tool extends AppModel {
 
 
     public function dropTool($toolToDrop){
+        App::uses('CakeSession', 'Model/Datasource');
+        $idFighterSelected=CakeSession::read('User.fighter')['id'];
     	$toolToDrop["fighter_id"]=null;
     	$this->save($toolToDrop);
 
     	
         $fighterModel=new Fighter();
-        $currentFighter = $fighterModel->find("first",array("conditions"=>array("Fighter.id"=>$_SESSION["idFighterSelected"])))["Fighter"];
+        $currentFighter = $fighterModel->find("first",array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"];
         $toolType=$toolToDrop["type"];
         $toolBonus=$toolToDrop["bonus"];
 
@@ -52,6 +55,14 @@ class Tool extends AppModel {
         }
 
         $fighterModel->save($currentFighter);
+    }
+
+    public function releaseItem($idFighter){
+        $listTool=$this->find('all', array("conditions"=>array("fighter_id"=>$idFighter)));
+
+        foreach($listTool as $key=>$values){
+            debug($values[$key]);
+        }
     }
 
 

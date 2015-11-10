@@ -2,12 +2,9 @@
 <!--<?php echo $this->Html->image('1.jpg', array('style' => 'width:100px;', 'class' => 'img-circle img-responsive img-thumbnail'));?>-->
 <section class="container-fluid" id="section8">
     
-    <?php $player = $this->Session->read('User');
-        
-    debug($player);
-    debug($this->Session->read('User.fighter'))
+    <?php 
+    	if($fighterIsSelected){
     ?>
-    
     <div class="row">
             <div class="col-sm-8 ">
 				<div class="row">
@@ -15,27 +12,23 @@
 						<?php
                                                 debug($fighter);
 						echo('[');
-						 echo($fighter['coordinate_x']);
+						 echo($fighter['coordinate_x']+1);
 						 echo(':');
-						echo($fighter['coordinate_y']);
+						echo($fighter['coordinate_y']+1);
 						echo(']');
 						
 						for ($i = 9; $i >= 0; $i--) {
 							echo("<div class=\"row\">");
 							
 							for ($j = 0; $j <= 14; $j++) {
-								if(isset($map[$j][$i]['fighter']['Fighter']['name'])){
-									/*si c'est notre fighter*/
-                                                                    
-									if($j == $fighter['coordinate_x'] && $i == $fighter['coordinate_y']){
-                                                                           
-										echo $this->Html->image('fighter.png');
-									}else{/*si c'est un autre*/
-										echo $this->Html->image('autre.png');
-									}
-								}else if(isset($map[$j][$i]['tool']['Tool']['id'])){
-										echo $this->Html->image('tool.png');
-								}else{/*case vide*/
+
+								if($j == $fighter['coordinate_x'] && $i == $fighter['coordinate_y']){
+									echo $this->Html->image('fighter.png');
+								}elseif(isset($map[$j][$i]['fighter']['Fighter']['name'])){
+									echo $this->Html->image('autre.png');
+								}elseif(isset($map[$j][$i]['tool']['Tool']['id'])){
+									echo $this->Html->image('tool.png');
+								}else{
 									echo $this->Html->image('case.png');
 								}
 							}
@@ -87,22 +80,21 @@
 							
 							<?php
 								if(isset($tool) && !empty($tool)){
-									/*echo $this->Form->create('pickStuff', array(
+									echo $this->Form->create('pickStuff', array(
 									'inputDefaults' => array(
 									'div' => 'form-group',
 									'wrapInput' => false,
 									'class' => 'form-control'
 									),
 									'class' => 'well'
-									));*/
+									));
 									echo "<legend>Ramassez un objet</legend>";
 									echo "Vous êtes sur l'objet suivant : ";
 									pr($tool);
-									echo "NE FONCTIONNE PAS";
-									echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'sight'), array('class'=>'btn btn-info'));
-									
-									//echo $this->Form->button(array('label' => 'Pickup de balzen', 'class' => 'btn btn-info'));
-									//echo $this->Form->end();
+									//echo "NE FONCTIONNE PAS";
+									//echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'sight'), array('class'=>'btn btn-info'));
+									echo $this->Form->hidden('id');
+									echo $this->Form->end(array('label' => 'Pickup de balzen', 'class' => 'btn btn-info'));
 								}
 							?>
 					
@@ -203,6 +195,14 @@
 		pr($fighter);
         ?>
     </div>
+
+
+    <?php }
+
+    else{
+    	debug("\n\n\n\n\n");
+    	echo "First, select a fighter !";
+    	}?>
 
 </section>
 
