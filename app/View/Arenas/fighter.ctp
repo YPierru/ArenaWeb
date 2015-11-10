@@ -127,6 +127,8 @@
                echo $this->Form->input('details_fighter', array(
                  'options' => $names
              ));
+
+
              echo $this->Form->end(array('label' => 'Show details', 'class' => 'btn btn-info'));
            ?> 
 
@@ -237,3 +239,7 @@
     <?php echo $this->Form->end(array('label' => 'Create', 'class' => 'btn btn-info')); ?>
  </div>
 </section>
+
+
+
+
