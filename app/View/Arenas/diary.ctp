@@ -1,6 +1,6 @@
 <?php $this->assign('title', 'Diary');?>
 
-<?php pr($raw); ?>
+<?php pr($diary); ?>
 
 <section class="container-fluid" id="section5">
     <div class="row">
