@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class ArenasController extends AppController
 {
 
-	public $uses = array('Player', 'Fighter', 'Event','Tool');
+    public $uses = array('Player', 'Fighter', 'Event','Tool');
     public $helpers = array('Js' => array('Jquery'));
 
     /**
@@ -26,8 +26,8 @@ class ArenasController extends AppController
      * @return [type] [description]
      */
     public function sight(){
-        //debug("");
-        //debug("");
+        debug("");
+        debug("");
         //Move or Attack according to the form
         $idFighterSelected=$this->Session->read("User.fighter");
         $fighterAlive=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)));
@@ -44,13 +44,33 @@ class ArenasController extends AppController
             $this->set('fighterIsSelected', true);
         	if ($this->request->is('post')){
         		$key=key($this->request->data);
-
                 if($key=="Fightermove"){
                     $this->Fighter->doMove($this->request->data[$key]['direction']);
-
+                    $newEvent = array(
+                        "name" => $this->Fighter->findById($idFighterSelected)["Fighter"]["name"]+"Move",
+                        "date" => date("Y-m-d H:i:s"),
+                        "coordinate_x" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_x"],
+                        "coordinate_y" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_y"]
+                    );
+                    $this->Event->create($newEvent);
+                    $this->Event->save();
                 }else if($key=="Fighterattack"){
                     $this->Fighter->doAttack($this->request->data[$key]['direction']);
+                    $newEvent = array(
+                        "name" => $this->Fighter->findById($idFighterSelected)["Fighter"]["name"]+"Attack",
+                        "date" => date("Y-m-d H:i:s"),
+                        "coordinate_x" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_x"],
+                        "coordinate_y" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_y"]
+                    );
+                    $this->Event->create($newEvent);
                 }else if($key=="lvlupform"){
+                    $newEvent = array(
+                        "name" => $this->Fighter->findById($idFighterSelected)["Fighter"]["name"]+"LvlUp",
+                        "date" => date("Y-m-d H:i:s"),
+                        "coordinate_x" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_x"],
+                        "coordinate_y" => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_y"]
+                    );
+                    $this->Event->create($newEvent);
                     $upType=$this->request->data[$key]['type'];
                     $this->Fighter->lvlUpFighter($upType);
                 }else if($key=="pickStuff"){
@@ -118,7 +138,7 @@ class ArenasController extends AppController
         foreach($listFighter as $fighter){
             $tempX=$fighter["Fighter"]["coordinate_x"];
             $tempY=$fighter["Fighter"]["coordinate_y"];
-            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view && $fighter["Fighter"]["current_health"] > 0){
                 $map[$tempX][$tempY]["fighter"]= $fighter;
             }
         }
@@ -170,6 +190,13 @@ class ArenasController extends AppController
                 $this->set("actualStuffDetails", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterDetails))));
             
             }else if($key=="Fightercreate"){
+                        $newEvent = array(
+                            name => "Creation"+$this->Fighter->findById($idFighterSelected)["Fighter"]["name"],
+                            date => date("Y-m-d H:i:s"),
+                            coordinate_x => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_x"],
+                            coordinate_y => $this->Fighter->findById($idFighterSelected)["Fighter"]["coordinate_y"],
+                        );
+                        $this->Event->create($newEvent);
                 $newFighterName=$this->request->data[$key]["name"];
 
                 if(empty($newFighterName)){
