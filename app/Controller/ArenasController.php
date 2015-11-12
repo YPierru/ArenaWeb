@@ -113,7 +113,7 @@ class ArenasController extends AppController
         foreach($listFighter as $fighter){
             $tempX=$fighter["Fighter"]["coordinate_x"];
             $tempY=$fighter["Fighter"]["coordinate_y"];
-            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view && $fighter["Fighter"]["current_health"] > 0){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view && $fighter["Fighter"]["current_health"] >= 0 && $fighter["Fighter"]["player_id"]!=$this->Session->read("User.player")){
                 $map[$tempX][$tempY]["fighter"]= $fighter;
             }
         }
@@ -121,7 +121,7 @@ class ArenasController extends AppController
             $tempX=$Tool["Tool"]["coordinate_x"];
             $tempY=$Tool["Tool"]["coordinate_y"];
             if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view){
-                if($Tool["Tool"]["fighter_id"]==null){
+                if($Tool["Tool"]["fighter_id"]==NULL){
                     $map[$tempX][$tempY]["tool"]= $Tool;
                 }
             }           
@@ -156,6 +156,8 @@ class ArenasController extends AppController
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
                 $idFighterSelected=$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"]["id"];
                 $this->Session->write("User.fighter",$idFighterSelected);
+                $this->set("currentFighter", $this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$this->Session->read("User.fighter"))))["Fighter"]);
+                $this->set("actualStuff", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$this->Session->read("User.fighter")))));
     		
             }else if($key=="Fighterdetails"){
                 $this->set('selection',true);
@@ -165,7 +167,6 @@ class ArenasController extends AppController
                 $this->set("actualStuffDetails", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterDetails))));
             
             }else if($key=="Fightercreate"){
-                $this->Event->addEvent("creation",$this->Fighter->findById($idFighterSelected)["Fighter"]["name"]);
                 $newFighterName=$this->request->data[$key]["name"];
 
                 if(empty($newFighterName)){
@@ -175,6 +176,7 @@ class ArenasController extends AppController
                     debug("Fighter ".$newFighterName." already exists.");
                 }else{
                     $this->Fighter->createFighter($newFighterName);
+                    $this->Event->addEvent("creation",$newFighterName);
                     $names=$this->sendArrayNamesToView($idPlayer);
                 }
                 

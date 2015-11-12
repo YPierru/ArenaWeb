@@ -24,6 +24,7 @@ class Tool extends AppModel {
 
         }elseif($toolType=="healthUp"){
             $currentFighter["skill_health"]+=$toolBonus;
+            $currentFighter["current_health"]=$currentFighter["skill_health"];
 
         }
 

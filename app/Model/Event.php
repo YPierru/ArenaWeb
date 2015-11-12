@@ -14,11 +14,14 @@ class Event extends AppModel {
     $fighter=$fighterModel->findById($idFighter)["Fighter"];
 
     if($eventType=="creation"){
+      $cooX=$fighterModel->find('first', array("conditions"=>array("Fighter.name"=>$nameNewFighter)))["Fighter"]["coordinate_x"];
+      $cooY=$fighterModel->find('first', array("conditions"=>array("Fighter.name"=>$nameNewFighter)))["Fighter"]["coordinate_y"];
+      
       $newEvent = array(
         "name" => $nameNewFighter." : ".$eventType.".",
         "date" => date("Y-m-d H:i:s"),
-        "coordinate_x" => "0",
-        "coordinate_y" => "0"
+        "coordinate_x" => $cooX,
+        "coordinate_y" => $cooY
       );
     }else{
       $newEvent = array(

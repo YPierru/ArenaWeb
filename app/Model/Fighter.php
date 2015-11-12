@@ -21,9 +21,9 @@ class Fighter extends AppModel {
         
         App::uses('CakeSession', 'Model/Datasource');
         $idFighterSelected=CakeSession::read('User.fighter');
-      $myFighter=$this->findById($idFighterSelected);
+        $myFighter=$this->findById($idFighterSelected);
 
-      $errorMessage="";
+        $errorMessage="";
 
         /**
          * Change coo of the fighter according to direction and arena limit
@@ -194,15 +194,15 @@ class Fighter extends AppModel {
             App::uses('CakeSession', 'Model/Datasource');
             $idUser=CakeSession::read('User.player');
         }
-        debug($idUser);
+        //debug($idUser);
         $newFighter=array(
             "name"=>$newName,
             "player_id"=>$idUser,
-            "coordinate_x"=>0,
-            "coordinate_y"=>0,
+            "coordinate_x"=>rand(0,14),
+            "coordinate_y"=>rand(0,9),
             "level"=>1,
             "xp"=>0,
-            "skill_sight"=>20,
+            "skill_sight"=>2,
             "skill_strength"=>1,
             "skill_health"=>3,
             "current_health"=>3);
