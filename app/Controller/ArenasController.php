@@ -26,30 +26,36 @@ class ArenasController extends AppController
      * @return [type] [description]
      */
     public function sight(){
+        //debug("");
+        //debug("");
         //Move or Attack according to the form
         $idFighterSelected=$this->Session->read("User.fighter");
-
-        $toolFound=$this->isFighterOnTool($idFighterSelected);
-        if(!empty($toolFound)){
-            $this->set("tool",$toolFound);
+        $fighterAlive=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)));
+        if(empty($fighterAlive)){
+            $this->Session->write("User.fighter",null);
+            $idFighterSelected=$this->Session->read("User.fighter");
         }
+        //$toolFound=$this->isFighterOnTool($idFighterSelected);
+        //if(!empty($toolFound)){
+           // $this->set("tool",$toolFound);
+        //}
 
         if($idFighterSelected!=null){
             $this->set('fighterIsSelected', true);
         	if ($this->request->is('post')){
         		$key=key($this->request->data);
 
-                    if($key=="Fightermove"){
-                        $this->Fighter->doMove($this->request->data[$key]['direction']);
+                if($key=="Fightermove"){
+                    $this->Fighter->doMove($this->request->data[$key]['direction']);
 
-                    }else if($key=="Fighterattack"){
-                        $this->Fighter->doAttack($this->request->data[$key]['direction']);
-                    }else if($key=="lvlupform"){
-                        $upType=$this->request->data[$key]['type'];
-                        $this->Fighter->lvlUpFighter($upType);
+                }else if($key=="Fighterattack"){
+                    $this->Fighter->doAttack($this->request->data[$key]['direction']);
+                }else if($key=="lvlupform"){
+                    $upType=$this->request->data[$key]['type'];
+                    $this->Fighter->lvlUpFighter($upType);
                 }else if($key=="pickStuff"){
                     $listTools=$this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterSelected)));
-
+                    $toolFound=$this->isFighterOnTool($idFighterSelected);
                     $typeToolFound=$toolFound["type"];
                     foreach ($listTools as $value) {
                         if($typeToolFound==$value["Tool"]["type"]){
@@ -64,6 +70,11 @@ class ArenasController extends AppController
                     
         	}
 
+
+            $toolFound=$this->isFighterOnTool($idFighterSelected);
+            if(!empty($toolFound)){
+                $this->set("tool",$toolFound);
+            }
             
             if(!empty($idFighterSelected)){
                 $fighterXP=$this->Fighter->find("first",array("conditions"=>array("Fighter.id"=>$idFighterSelected)))['Fighter']['xp'];
@@ -74,6 +85,7 @@ class ArenasController extends AppController
 
             $this->set("map",$this->createMap());
             $this->set("fighter",$this->Fighter->findById($idFighterSelected)["Fighter"]);
+            $this->set("actualStuff", $this->Tool->find('all', array("conditions"=>array("Tool.fighter_id"=>$idFighterSelected))));
         }else{
             $this->set('fighterIsSelected', false);
         }
@@ -83,7 +95,13 @@ class ArenasController extends AppController
         $cooX=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"]["coordinate_x"];
         $cooY=$this->Fighter->find('first', array("conditions"=>array("Fighter.id"=>$idFighterSelected)))["Fighter"]["coordinate_y"];
 
-        $tool=$this->Tool->find('first', array("conditions"=>array("Tool.coordinate_x"=>($cooX),"Tool.coordinate_y"=>($cooY),"Tool.fighter_id"=>null)))["Tool"];
+        //debug("");
+        //debug($cooX." ".$cooY);
+
+        $tool=$this->Tool->find('first', array("conditions"=>array("Tool.coordinate_x"=>$cooX,"Tool.coordinate_y"=>$cooY,"Tool.fighter_id"=>null)));
+        if(!empty($tool)){
+            $tool=$tool["Tool"];
+        }
 
         return $tool;
     }
@@ -100,14 +118,14 @@ class ArenasController extends AppController
         foreach($listFighter as $fighter){
             $tempX=$fighter["Fighter"]["coordinate_x"];
             $tempY=$fighter["Fighter"]["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view){
                 $map[$tempX][$tempY]["fighter"]= $fighter;
             }
         }
         foreach($listTool as $Tool){
             $tempX=$Tool["Tool"]["coordinate_x"];
             $tempY=$Tool["Tool"]["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view){
                 if($Tool["Tool"]["fighter_id"]==null){
                     $map[$tempX][$tempY]["tool"]= $Tool;
                 }
@@ -141,7 +159,7 @@ class ArenasController extends AppController
     		if($key=="Fighterselect"){
                 //Send fighter data to the view
                 $nameSelected = $names[$this->request->data[$key]["selected_fighter"]];
-                $idFighterSelected=$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"];
+                $idFighterSelected=$this->Fighter->find('first', array("conditions"=>array("Fighter.name"=>$nameSelected),"fields"=>array("Fighter.id")))["Fighter"]["id"];
                 $this->Session->write("User.fighter",$idFighterSelected);
     		
             }else if($key=="Fighterdetails"){
@@ -174,10 +192,14 @@ class ArenasController extends AppController
         if(isset($names)){
             unset($names);
         }
+        $names[0]="First, create a fighter";
 
         $allFighterNames=$this->Fighter->find('all', array("conditions"=>array("Fighter.Player_id"=>$idPlayer),
                                                                         "fields"   =>array("Fighter.name")));
         //push the fighter's name in an array
+        if(!empty($allFighterNames)){
+            unset($names);
+        }
         foreach($allFighterNames as $fighter){
             $names[]=$fighter["Fighter"]["name"];
         }

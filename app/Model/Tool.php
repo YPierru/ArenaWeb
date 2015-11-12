@@ -7,7 +7,7 @@ class Tool extends AppModel {
     
     public function giveToFighter($toolFound){
         App::uses('CakeSession', 'Model/Datasource');
-        $idFighterSelected=CakeSession::read('User.fighter')['id'];
+        $idFighterSelected=CakeSession::read('User.fighter');
     	$toolFound["fighter_id"]=$idFighterSelected;
     	$this->save($toolFound);
     	
@@ -60,8 +60,10 @@ class Tool extends AppModel {
     public function releaseItem($idFighter){
         $listTool=$this->find('all', array("conditions"=>array("fighter_id"=>$idFighter)));
 
-        foreach($listTool as $key=>$values){
-            debug($values[$key]);
+
+        foreach($listTool as $values){
+            $values['Tool']["fighter_id"]=NULL;
+            $this->save($values);
         }
     }
 

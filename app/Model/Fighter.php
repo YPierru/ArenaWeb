@@ -160,7 +160,7 @@ class Fighter extends AppModel {
                //Get the fighter attacked
             $fighterDef=$findFighter["Fighter"];
           //$randVal=rand(1,20);
-            $randVal=11;
+            $randVal=110;
             $fighterDefLvl=$fighterDef["level"];
             $fighterAtkLvl=$myFighter["level"];
             //Check if attack successed
@@ -173,13 +173,12 @@ class Fighter extends AppModel {
                 //up XP of the attacker
                 $this->save($fighterDef);
                if($fighterDef["current_health"]<=0){
-
                   debug("fighter def is dead");
                   $fighterDef["current_health"]=0;
                   $myFighter["xp"]+=$fighterDefLvl;
                   $toolModel=new Tool();
                   $toolModel->releaseItem($fighterDef["id"]);
-                  //$this->destroyFighter($fighterDef["id"]);
+                  $this->destroyFighter($fighterDef["id"]);
                }
 
             }else{
@@ -201,9 +200,9 @@ class Fighter extends AppModel {
             "player_id"=>$idUser,
             "coordinate_x"=>0,
             "coordinate_y"=>0,
-            "level"=>3,
+            "level"=>1,
             "xp"=>0,
-            "skill_sight"=>0,
+            "skill_sight"=>20,
             "skill_strength"=>1,
             "skill_health"=>3,
             "current_health"=>3);
@@ -230,6 +229,8 @@ class Fighter extends AppModel {
         }elseif($upType=="upstrength"){
             $fighter["skill_strength"]++;
         }
+
+        $fighter["current_health"]=$fighter["skill_health"];
 
         $fighter["xp"]=$fighter["xp"]-3;
         $fighter["level"]++;

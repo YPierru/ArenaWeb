@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-sm-10 col-md-offset-1">
 						<?php
-                                                debug($fighter);
+                                                //debug($fighter);
 						echo('[');
 						 echo($fighter['coordinate_x']+1);
 						 echo(':');
@@ -91,8 +91,6 @@
 									echo "<legend>Ramassez un objet</legend>";
 									echo "Vous êtes sur l'objet suivant : ";
 									pr($tool);
-									//echo "NE FONCTIONNE PAS";
-									//echo $this->Html->link('Login', array('controller' => 'Arenas', 'action' => 'sight'), array('class'=>'btn btn-info'));
 									echo $this->Form->hidden('id');
 									echo $this->Form->end(array('label' => 'Pickup de balzen', 'class' => 'btn btn-info'));
 								}
@@ -159,29 +157,26 @@
 					<div class="progress">
 						<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo($fighter["current_health"]);?>" aria-valuemin="0" aria-valuemax="<?php echo($fighter["skill_health"]);?>" style="width: <?php echo($fighter["current_health"]*100/$fighter["skill_health"]);?>%;">
 						<?php 
-						echo($fighter["current_health"]);
-						echo("/");
-						echo($fighter["skill_health"]);
+							echo($fighter["current_health"]);
+							echo("/");
+							echo($fighter["skill_health"]);
 						?>
 						</div>
 					</div>
 				</div>
 			</div>
-                
-                
-                
-              
+                  
 			<?php 
 				if(isset($levelUpEnable) && ($levelUpEnable==true)){
-				echo "Level up available !";
-				echo "Choose the skill you want to up (+1)";
-				echo $this->Form->create("lvlupform");
-				echo $this->Form->radio('type', array(
-				'upsight' => 'Sight',
-				'upstrength' => 'Strength',
-				'uphealth'=>'Health'
-				));
-				echo $this->Form->end(array('label' => 'lvl up', 'class' => 'btn btn-info'));
+					echo "Level up available !";
+					echo "Choose the skill you want to up (+1)";
+					echo $this->Form->create("lvlupform");
+					echo $this->Form->radio('type', array(
+					'upsight' => 'Sight',
+					'upstrength' => 'Strength',
+					'uphealth'=>'Health'
+					));
+					echo $this->Form->end(array('label' => 'lvl up', 'class' => 'btn btn-info'));
 				}
 			?>
              
@@ -189,10 +184,9 @@
     </div>
     
     <div class="row">
-        <legend>Carte</legend>
+        <legend>Tools</legend>
         <?php
-        pr($map);
-		pr($fighter);
+      		pr($actualStuff);
         ?>
     </div>
 
@@ -200,8 +194,7 @@
     <?php }
 
     else{
-    	debug("\n\n\n\n\n");
-    	echo "First, select a fighter !";
+    		echo "First, select a fighter !";
     	}?>
 
 </section>
