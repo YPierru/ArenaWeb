@@ -100,14 +100,14 @@ class ArenasController extends AppController
         foreach($listFighter as $fighter){
             $tempX=$fighter["Fighter"]["coordinate_x"];
             $tempY=$fighter["Fighter"]["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view && $fighter["health"] > 0){
                 $map[$tempX][$tempY]["fighter"]= $fighter;
             }
         }
         foreach($listTool as $Tool){
             $tempX=$Tool["Tool"]["coordinate_x"];
             $tempY=$Tool["Tool"]["coordinate_y"];
-            if( $tempX > $cooX - $view && $tempX < $cooX+$view && $tempY > $cooY - $view && $tempY < $cooY + $view){
+            if( $tempX >= $cooX - $view && $tempX <= $cooX+$view && $tempY >= $cooY - $view && $tempY <= $cooY + $view){
                 if($Tool["Tool"]["fighter_id"]==null){
                     $map[$tempX][$tempY]["tool"]= $Tool;
                 }
