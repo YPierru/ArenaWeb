@@ -102,13 +102,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <h4>Sources</h4>
                 <ul class="nav">
                     <li><a href="https://github.com/YPierru/ArenaWeb">Github</a></li>
-                    <li><a href="https://github.com/YPierru/ArenaWeb/blob/master/gitlog.txt">Git log</a></li>
+                    <li><a href="https://raw.githubusercontent.com/YPierru/ArenaWeb/master/gitlog.txt">Git log</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 col-md-3 column">
                 <h4>IMPORTANT A LIRE</h4>
                 <ul class="nav">
-                    <li><a href="https://github.com/YPierru/ArenaWeb/blob/master/lisezmoi.txt">Lisez moi</a></li>
+                    <li><a href="https://raw.githubusercontent.com/YPierru/ArenaWeb/master/lisezmoi.txt">Lisez moi</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 col-md-3 column">

@@ -11,3 +11,16 @@ sightUp
 healthUp
 strengthUp
 Afin de tester le bon fonctionnement du jeu, il faut que les tools aient ce nom là dans la base et aucun autre.
+
+
+D'autre part, voici notre organisation avec le repo Git et la synchronisation github
+Nous travaillions avec un repo principal (sur le serveur web), c'est celui qui est fourni dans le lien footer.
+Clément et Charles travaillait chacun sur un fork. A chaque itération ils push leur modification sur leur github, puis faisait une pull request afin que Yan procède au merge sur le repository principal.
+
+OPTIONS FACULTATIVES
+->APIs (fighterview, domove, doattack)
+->Gestion de plusieurs fighter
+->Gestion des équipements
+->Utilisation de bootstrap
+->Versioning
+->Mise en ligne sur internet
