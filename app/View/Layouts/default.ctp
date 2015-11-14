@@ -115,7 +115,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <h4>Autres</h4>
                 <ul class="nav">
                     <li><a href="#">Gr2-02-AF</a></li>
-                    <li><a href="http://raspbmcynp.ddns.net/WebArenaGoupSIA-02-AF/Arenas">Arena web (lien internet)</a></li>
+                    <li><a href="http://raspbmcynp.ddns.net/WebArenaGroupSIA-02-AF/Arenas">Arena web (lien internet)</a></li>
                     <li><a href="#">Prof Mr Falconet</a></li>
                     <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
