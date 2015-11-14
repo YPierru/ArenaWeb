@@ -1,18 +1,14 @@
 <?php
-
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 // app/Model/Player.php
 App::uses('AppModel', 'Model');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
-
 class User extends AppModel {
     public $useTable = 'players';
-
     
     public $validate = array(
         'id' => array(
@@ -62,7 +58,6 @@ class User extends AppModel {
             "email"=>$newEmail,
             "password"=>$newPassWord
             );
-
         $this->create($newPlayer);
         
         if ($this->save()) {
@@ -72,7 +67,6 @@ class User extends AppModel {
             debug('L\'user n\'a pas été sauvegardé. Merci de réessayer.');
            // $this->Flash->error(__('L\'user n\'a pas été sauvegardé. Merci de réessayer.'));
         }
-
     }
       
 }

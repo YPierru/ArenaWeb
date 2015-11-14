@@ -1,71 +1,22 @@
 <?php $this->assign('title', 'Diary');?>
 
-<?php pr($diary); ?>
-
 <section class="container-fluid" id="section5">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-            <h2 class="text-center lato">Section with Marketing Highlights.</h2>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-left">
-                    <img src="//placehold.it/100">
+            <h2 class="text-center lato">Journal des activités</h2>
+            
+            <?php
+            foreach($diary as $event){ ?>
+                
+                <hr>
+                <div class="media">
+                    <h4><?php echo($names[]=$event["date"]);?></h4>
+                    <div class="media-left"><h4>[<?php echo($names[]=$event["coordinate_x"]);?>;<?php echo($names[]=$event["coordinate_y"]);?>]</h4></div>
+                    <div class="media-body"><h4><?php echo($names[]=$event["name"]);?></h4></div>
                 </div>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-            </div>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-                <div class="media-right">
-                    <img src="//placehold.it/100">
-                </div>
-            </div>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-left">
-                    <img src="//placehold.it/100">
-                </div>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-            </div>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-                <div class="media-right">
-                    <img src="//placehold.it/100">
-                </div>
-            </div>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-left">
-                    <img src="//placehold.it/100">
-                </div>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-            </div>
-            <hr>
-            <div class="media">
-                <h3>Event</h3>
-                <div class="media-body media-middle">
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-                </div>
-                <div class="media-right">
-                    <img src="//placehold.it/100">
-                </div>
-            </div>
+            
+            <?php }?>
+           
 
         </div>
     </div>

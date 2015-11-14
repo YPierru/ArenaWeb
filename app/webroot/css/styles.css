@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Bitter:400);
 
 html,body {
-	height:100%;
+  height:100%;
     /*background:center no-repeat fixed url('http://orig01.deviantart.net/e5bf/f/2013/326/b/1/les_deux_petites_chevres_by_warobruno-d6v5htq.jpg');*/
     background: center no-repeat fixed url(/ArenaWeb-master/img/trool.jpg);
     background-size: cover;
@@ -51,11 +51,11 @@ a:hover {
 }
 
 .icon-bar {
-	background-color:#fff;
+  background-color:#fff;
 }
 
 .navbar-trans {
-	background-color:#2b2b2b;
+  background-color:#2b2b2b;
     color:#cdcdcd;
     border-width:0;
 }
@@ -66,14 +66,14 @@ a:hover {
 }
 
 .navbar-trans li>a:focus,.navbar-trans li.active {
-	background-color:#f44d3c;
-	color:#333;
+  background-color:#f44d3c;
+  color:#333;
 }
 
 .navbar-trans li>a:hover {
-	background-color:#f44d3c;
-	color:#fff;
-	opacity:0.5;
+  background-color:#f44d3c;
+  color:#fff;
+  opacity:0.5;
 }
 
 .navbar-trans a{
@@ -82,10 +82,10 @@ a:hover {
 }
 
 .navbar-trans .form-control:focus {
-	border-color: #eee;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(100,100,100,0.6);
-	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(100,100,100,0.6);
+  border-color: #eee;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(100,100,100,0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(100,100,100,0.6);
 }
 
 .scroll-down {
@@ -143,65 +143,169 @@ section {
 }
   
 #section1, #section3 {
-	background-color: rgba(0,0,0,0.7);
-	color:#fff;
-	font-family: 'Bitter', serif;
+  background-color: rgba(0,0,0,0.7);
+  color:#fff;
+  font-family: 'Bitter', serif;
 }
   
 #section4 {
-	background-color: #f6f6f6;
-	color:#444;
+  background-color: #f6f6f6;
+  color:#444;
 }
   
 #section2 {
-	background-color: #fff;
+  background-color: #fff;
 
 }
 
 #section3 {
-	background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.9);
 }
 
 #section5 {
-	background-color: #fff;
+  background-color: #fff;
 }
 
 #section6 {
     background-color: #eee;
-	min-height:130px;
-	padding-top:40px;
-	padding-bottom:40px;
+  min-height:130px;
+  padding-top:40px;
+  padding-bottom:40px;
 }
 
 #section7 {
-	background-color: #f44d3c;
-	color: #f6f6f6;
-	min-height:130px;
-	padding-top:40px;
-	padding-bottom:40px;
+  background-color: #f44d3c;
+  color: #f6f6f6;
+  min-height:130px;
+  padding-top:40px;
+  padding-bottom:40px;
 }
 
 #section8 {
-	background-color: #f6f6f6;
-	color:#444;
+  background-color: #f6f6f6;
+  color:#444;
         padding-top:20px;  
         padding-bottom:20px;
 }
 #section9 {
-	background-color: #f44d3c;
-	min-height:70%;
-	padding-top:70px;
-	padding-bottom:40px;
+  background-color: rgba(0,0,0,0.7);
+  
+  min-height:70%;
+  padding-top:70px;
+  padding-bottom:40px;
 } 
 #section10 {
-	background-color: #FFC041;
-	min-height:70%;
-	padding-top:70px;
-	padding-bottom:40px;
+  background-color: #FFC041;
+  min-height:70%;
+  padding-top:70px;
+  padding-bottom:40px;
 } 
 
+
+
+.panel-login {
+  border-color: #ccc;
+  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+.panel-login>.panel-heading {
+  color: #00415d;
+  background-color: #fff;
+  border-color: #fff;
+  text-align:center;
+}
+.panel-login>.panel-heading a{
+  text-decoration: none;
+  color: #666;
+  font-weight: bold;
+  font-size: 15px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+  color: #029f5b;
+  font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  clear: both;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+  background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+  background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+  height: 45px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+  outline:none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-color: #ccc;
+}
+.btn-login {
+  background-color: #59B2E0;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 0;
+  text-transform: uppercase;
+  border-color: #59B2E6;
+}
+.btn-login:hover,
+.btn-login:focus {
+  color: #fff;
+  background-color: #53A3CD;
+  border-color: #53A3CD;
+}
+.forgot-password {
+  text-decoration: underline;
+  color: #888;
+}
+.forgot-password:hover,
+.forgot-password:focus {
+  text-decoration: underline;
+  color: #666;
+}
+
+.btn-register {
+  background-color: #1CB94E;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  height: auto;
+  font-weight: normal;
+  padding: 14px 0;
+  text-transform: uppercase;
+  border-color: #1CB94A;
+}
+.btn-register:hover,
+.btn-register:focus {
+  color: #fff;
+  background-color: #1CA347;
+  border-color: #1CA347;
+}
+
+
+
+
+
 footer {
-	background-color:#2b2b2b;
+  background-color:#2b2b2b;
     color:#ddd;
     min-height:100px;
     padding-top:20px;
@@ -215,5 +319,15 @@ footer .nav>li>a {
 
 footer .nav>li>a:hover {
     background-color:transparent;
-	color:#fff;
+  color:#fff;
+}
+
+.imageAndText {position: relative;} 
+.imageAndText .col {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+     color: #ffffff;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

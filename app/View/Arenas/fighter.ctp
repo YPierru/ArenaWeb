@@ -82,7 +82,7 @@
 						</div>
 						<div class="row">
 							<div class="media-left">
-								<?php echo $this->Html->image('hearth.png');?>
+								<?php echo $this->Html->image('health.png');?>
 							</div>
 							<div class="media-body media-middle">
 							   
@@ -98,12 +98,144 @@
 								
 							</div>
 						</div>
-                          
+                                                 <div class="row">
+                                <div class="media-body media-left">
+                                        <?php
+                                        if(isset($actualStuff['0']['Tool']["type"])){ 
+                                            if($actualStuff['0']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['0']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['0']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                ?></div>
+                                <div class="media-body media-middle"><?php
+                                        if(isset($actualStuff['1']['Tool']["type"])){ 
+                                            if($actualStuff['1']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['1']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['1']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                ?></div>
+                                <div class="media-body media-right"><?php       
+                                        if(isset($actualStuff['2']['Tool']["type"])){ 
+                                            if($actualStuff['2']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['2']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuff['2']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuff['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                        ?>
+                                
+                                   
+                                   
+                                    
+                                    
+                                       
+                                        
+                                </div>
+
+
+                        </div>
+                
                     
                     <?php
-                    	pr($actualStuff);
+                    	
 				
-
                             }
                     }else{
                             echo "No fighter selected";
@@ -130,8 +262,6 @@
                echo $this->Form->input('details_fighter', array(
                  'options' => $names
              ));
-
-
              echo $this->Form->end(array('label' => 'Show details', 'class' => 'btn btn-info'));
            ?> 
 
@@ -190,7 +320,7 @@
 						</div>
 						<div class="row">
 							<div class="media-left">
-								<?php echo $this->Html->image('hearth.png');?>
+								<?php echo $this->Html->image('health.png');?>
 							</div>
 							<div class="media-body media-middle">
 							   
@@ -206,9 +336,142 @@
 								
 							</div>
 						</div>
-						
+						 <div class="row">
+                                                     
+                                <div class="media-body media-left">
+                                        <?php
+                                        if(isset($actualStuffDetails['0']['Tool']["type"])){ 
+                                            if($actualStuffDetails['0']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['0']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['0']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['0']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                ?></div>
+                                <div class="media-body media-middle"><?php
+                                        if(isset($actualStuffDetails['1']['Tool']["type"])){ 
+                                            if($actualStuffDetails['1']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['1']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['1']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['1']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                ?></div>
+                                <div class="media-body media-right"><?php       
+                                        if(isset($actualStuffDetails['2']['Tool']["type"])){ 
+                                            if($actualStuffDetails['2']['Tool']["type"] == 'healthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_health.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['2']['Tool']["type"] == 'sightUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_sight.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                            else if($actualStuffDetails['2']['Tool']["type"] == 'strengthUp'){                                                
+                                                    ?><div class="imageAndText">
+                                                        <?php echo $this->Html->image('tool_strength.png', array( 'class' => 'align-center img-responsive'));?>
+
+                                                        <div class="col">
+                                                            <div class="col-sm-4 col-sm-offset-1">
+                                                                <h2><strong>+<?php echo($actualStuffDetails['2']['Tool']["bonus"]);?></strong></h2>
+                                                            </div>
+                                                        </div>
+                                                    </div><?php
+                                                
+                                            }
+                                        }
+                                        ?>
+                                
+                                   
+                                   
+                                    
+                                    
+                                       
+                                        
+                                </div>
+
+
+                        </div>
+                
                 <?php
-						pr($actualStuffDetails);
 				
 				}
                 ?>
@@ -242,7 +505,3 @@
     <?php echo $this->Form->end(array('label' => 'Create', 'class' => 'btn btn-info')); ?>
  </div>
 </section>
-
-
-
-

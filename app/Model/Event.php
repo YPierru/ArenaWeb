@@ -1,18 +1,12 @@
 <?php
-
 App::uses('AppModel', 'Model');
 App::uses('Fighter', 'Model');
-
-
 class Event extends AppModel {
-
-
   public function addEvent($eventType,$nameNewFighter=null){
     App::uses('CakeSession', 'Model/Datasource');
     $idFighter=CakeSession::read('User.fighter');
     $fighterModel = new Fighter();
     $fighter=$fighterModel->findById($idFighter)["Fighter"];
-
     if($eventType=="creation"){
       $cooX=$fighterModel->find('first', array("conditions"=>array("Fighter.name"=>$nameNewFighter)))["Fighter"]["coordinate_x"];
       $cooY=$fighterModel->find('first', array("conditions"=>array("Fighter.name"=>$nameNewFighter)))["Fighter"]["coordinate_y"];
@@ -31,13 +25,7 @@ class Event extends AppModel {
         "coordinate_y" => $fighter["coordinate_y"]
       );
     }
-
     $this->create($newEvent);
     $this->save();
   }
-
 }
-
-
-
-?>

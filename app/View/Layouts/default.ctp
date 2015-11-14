@@ -55,20 +55,20 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-collapsible">
                     <ul class="nav navbar-nav navbar-left">
-                                                <li><?php echo $this->Html->link('Welcome', array('controller' => 'Arenas', 'action' => '/')); ?></li>
+                                               
                                                 <?php
                                                  if (!($this->Session->read('Auth.User'))){
                                                     echo('<li>');
-                                                    echo $this->Html->link('Login', array('controller' => 'Users', 'action' => 'login'));
+                                                    echo $this->Html->link('Connexion/Inscription', array('controller' => 'Users', 'action' => 'login'));
                                                     echo('</li>');
                                                  }
                                                  if ($this->Session->read('Auth.User')){
                                                     echo('<li>');
-                                                    echo $this->Html->link('Fighters', array('controller' => 'Arenas', 'action' => 'fighter'));
+                                                    echo $this->Html->link('Guerriers', array('controller' => 'Arenas', 'action' => 'fighter'));
                                                     echo('</li> <li>');
-                                                    echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight'));
+                                                    echo $this->Html->link('Combat', array('controller' => 'Arenas', 'action' => 'sight'));
                                                     echo('</li> <li>');
-                                                    echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary'));
+                                                    echo $this->Html->link('Journal', array('controller' => 'Arenas', 'action' => 'diary'));
                                                     echo('</li> <li>');
                                                     echo $this->Html->link('Déconnexion', array('controller' => 'Users', 'action' => 'logout'));
                                                     echo('</li>');
