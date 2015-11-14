@@ -12,7 +12,7 @@
                     )); 
                 ?>
 
-                    <legend>Selection</legend>
+                    <legend>Sélection</legend>
 
                      <?php 
                     echo $this->Form->input('selected_fighter', array(
@@ -20,7 +20,7 @@
                     ));
                     ?>
 
-                 <?php echo $this->Form->end(array('label' => 'Select', 'class' => 'btn btn-info')); ?>
+                 <?php echo $this->Form->end(array('label' => 'Sélectionner', 'class' => 'btn btn-info')); ?>
                     
                     
                     
@@ -238,7 +238,7 @@
 				
                             }
                     }else{
-                            echo "No fighter selected";
+                            echo "Aucun guerrier sélectionné";
                     }
                 ?>
                
@@ -256,13 +256,13 @@
                        'class' => 'well'
                )); 
            ?>
-              <legend>Detail</legend> 
+              <legend>Détails</legend> 
 
            <?php  
                echo $this->Form->input('details_fighter', array(
                  'options' => $names
              ));
-             echo $this->Form->end(array('label' => 'Show details', 'class' => 'btn btn-info'));
+             echo $this->Form->end(array('label' => 'Afficher les caractéristiques', 'class' => 'btn btn-info'));
            ?> 
 
             
@@ -500,8 +500,8 @@
             <legend>Nouveau</legend>
             <div class="input-group">
     <?php
-	echo $this->Form->text('name',array('placeholder' => 'pseudo...','class' => 'form-control'));
+	echo $this->Form->text('name',array('placeholder' => 'Nom du guerrier','class' => 'form-control'));
 	?>
-    <?php echo $this->Form->end(array('label' => 'Create', 'class' => 'btn btn-info')); ?>
+    <?php echo $this->Form->end(array('label' => 'Créer un guerrier', 'class' => 'btn btn-info')); ?>
  </div>
 </section>

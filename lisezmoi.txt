@@ -1,0 +1,13 @@
+*******
+Nous avons choisi d'implémenter les équipements.
+Les équipements permettent d'améliorer chacune des capacité.
+Nous avons décidés qu'il était impossible d'avoir plus d'1 équipement de la même capacité. 
+On ne peut donc avoir que 3 équipements simultanément au maximum
+
+
+IMPORTANT
+Dans notre base de données, il y avait donc 9 équipements (+1,+2,+3 bonus) répartis en 3 noms : 
+sightUp
+healthUp
+strengthUp
+Afin de tester le bon fonctionnement du jeu, il faut que les tools aient ce nom là dans la base et aucun autre.

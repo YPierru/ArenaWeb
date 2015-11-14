@@ -4,7 +4,7 @@
 html,body {
   height:100%;
     /*background:center no-repeat fixed url('http://orig01.deviantart.net/e5bf/f/2013/326/b/1/les_deux_petites_chevres_by_warobruno-d6v5htq.jpg');*/
-    background: center no-repeat fixed url(/ArenaWeb-master/img/trool.jpg);
+    background: center no-repeat fixed url(../img/trool.jpg);
     background-size: cover;
     color:#444;
     font-family: 'Lato', sans-serif;

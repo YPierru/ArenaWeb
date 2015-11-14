@@ -85,7 +85,7 @@
                                                                 }
                                                        
                                                         echo $this->Form->hidden('id');
-                                                        echo $this->Form->end(array('label' => 'Rammasser', 'class' => 'btn btn-info'));
+                                                        echo $this->Form->end(array('label' => 'Ramasser', 'class' => 'btn btn-info'));
                                                 }
                                         ?>
                                     </div>
@@ -105,10 +105,10 @@
 								<legend>Bouge ton guerrier</legend>
 								<?php 
 									echo $this->Form->input('direction',
-									array('options' => array('north'=>'north','south'=>'south','east'=>'east','west'=>'west'),
+									array('options' => array('north'=>'Nord','south'=>'Sud','east'=>'Est','west'=>'Ouest'),
 										  'default' => 'east'));
 								?>
-							<?php echo $this->Form->end(array('label' => 'Move', 'class' => 'btn btn-info')); ?>
+							<?php echo $this->Form->end(array('label' => 'Déplacer', 'class' => 'btn btn-info')); ?>
 						</div>
 						<div class="col-sm-6 ">
 							
@@ -128,10 +128,10 @@
                                                                                 echo($messageAttaque);
                                                                             }
 									echo $this->Form->input('direction',
-									array('options' => array('north'=>'north','south'=>'south','east'=>'east','west'=>'west'),
-									'default' => 'east'));
+                                    array('options' => array('north'=>'Nord','south'=>'Sud','east'=>'Est','west'=>'Ouest'),
+                                          'default' => 'east'));
 								?>
-							<?php echo $this->Form->end(array('label' => 'Attack', 'class' => 'btn btn-info')); ?>
+							<?php echo $this->Form->end(array('label' => 'Attaquer', 'class' => 'btn btn-info')); ?>
 							
 							
 							
@@ -342,13 +342,13 @@
                   
 			<?php 
 				if(isset($levelUpEnable) && ($levelUpEnable==true)){
-					echo "Level up available !";
-					echo "Choose the skill you want to up (+1)";
+					echo "Augmente ton niveau !";
+					echo "Choisi la capacité que tu veux améliorer (+1)";
 					echo $this->Form->create("lvlupform");
 					echo $this->Form->radio('type', array(
-					'upsight' => 'Sight',
-					'upstrength' => 'Strength',
-					'uphealth'=>'Health'
+					'upsight' => 'Vue',
+					'upstrength' => 'Force',
+					'uphealth'=>'Vie'
 					));
 					echo $this->Form->end(array('label' => 'lvl up', 'class' => 'btn btn-info'));
 				}
@@ -362,7 +362,7 @@
 
     <?php }
     else{
-    		echo "First, select a fighter !";
+    		echo "Veuillez choisir un guerrier !";
     	}?>
 
 </section>

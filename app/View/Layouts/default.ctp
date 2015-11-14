@@ -64,9 +64,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                                                  }
                                                  if ($this->Session->read('Auth.User')){
                                                     echo('<li>');
-                                                    echo $this->Html->link('Guerriers', array('controller' => 'Arenas', 'action' => 'fighter'));
+                                                    echo $this->Html->link('Arène', array('controller' => 'Arenas', 'action' => 'sight'));
                                                     echo('</li> <li>');
-                                                    echo $this->Html->link('Combat', array('controller' => 'Arenas', 'action' => 'sight'));
+                                                    echo $this->Html->link('Guerriers', array('controller' => 'Arenas', 'action' => 'fighter'));
                                                     echo('</li> <li>');
                                                     echo $this->Html->link('Journal', array('controller' => 'Arenas', 'action' => 'diary'));
                                                     echo('</li> <li>');
@@ -96,32 +96,26 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <li><a href="#">Charles Costrel</a></li>
                     <li><a href="#">Clément Matthey</a></li>
                     <li><a href="#">Yan Pierru</a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </div>
-            <div class="col-xs-6 col-md-3 column">
-                <h4>Nous suivre</h4>
-                <ul class="nav">
-                    <li><a href="https://twitter.com/">Twitter</a></li>
-                    <li><a href="https://www.facebook.com/">Facebook</a></li>
-                    <li><a href="https://plus.google.com/">Google+</a></li>
-                    <li><a href="#"></a></li>
                 </ul>
             </div>
             <div class="col-xs-6 col-md-3 column">
                 <h4>Sources</h4>
                 <ul class="nav">
-                    <li><a href="http://cakephp.org/">CakePHP</a></li>
-                    <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
                     <li><a href="https://github.com/YPierru/ArenaWeb">Github</a></li>
-                    <li><a href="#"></a></li>
+                    <li><a href="https://github.com/YPierru/ArenaWeb/blob/master/gitlog.txt">Git log</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-3 column">
+                <h4>IMPORTANT A LIRE</h4>
+                <ul class="nav">
+                    <li><a href="https://github.com/YPierru/ArenaWeb/blob/master/lisezmoi.txt">Lisez moi</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 col-md-3 column">
                 <h4>Autres</h4>
                 <ul class="nav">
                     <li><a href="#">Gr2-02-AF</a></li>
-                    <li><a href="#">Arena web</a></li>
+                    <li><a href="http://raspbmcynp.ddns.net/WebArenaGoupSIA-02-AF/Arenas">Arena web (lien internet)</a></li>
                     <li><a href="#">Prof Mr Falconet</a></li>
                     <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>

@@ -1,0 +1,230 @@
+commit 50d315366bfbe2ba867007e46f664c61e76e2f39
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Nov 14 20:24:33 2015 +0100
+
+    some bugs, design
+
+commit 3a926531f573fa6f8cae26b82b76ae5c95582324
+Author: Yan <yan.pierru@gmail.com>
+Date:   Thu Nov 12 16:29:47 2015 +0100
+
+    fixe bug
+
+commit 8a6d8f2e4fcfcf09d80bf99e5964d78027918931
+Author: Yan <yan.pierru@gmail.com>
+Date:   Thu Nov 12 11:59:13 2015 +0100
+
+    add diary
+
+commit ae115a6c468f7bacd29a23f242a93c27d5b91c22
+Merge: 5041d53 b093de5
+Author: Yan <yan.pierru@gmail.com>
+Date:   Thu Nov 12 11:29:48 2015 +0100
+
+    bug corrections event
+
+commit 5041d5303ce14dbf9b7b21d2daaffe72e2d80cf8
+Author: Yan <yan.pierru@gmail.com>
+Date:   Thu Nov 12 11:20:40 2015 +0100
+
+    bug corrections sight
+
+commit b093de572b6b7a485d372fe3b4e9a240451b0995
+Merge: 961058e ad3165c
+Author: Yan <yan.pierru@gmail.com>
+Date:   Thu Nov 12 11:17:53 2015 +0100
+
+    Merge pull request #8 from ClMatthey/master
+    
+    add event insertion
+
+commit ad3165cb749eb3407aa1a1a268e818dd422a1b88
+Author: CMatthey <matthey.clement@hotmail.fr>
+Date:   Thu Nov 12 11:04:43 2015 +0100
+
+    Add insert into event table
+
+commit 1ca96f7b47a86e52e2d0542ff56ef483fd9a3114
+Author: CMatthey <matthey.clement@hotmail.fr>
+Date:   Thu Nov 12 10:13:43 2015 +0100
+
+    Add a verification before adding a fighter to the map.
+
+commit 961058ed4967fd63fb03e9af48cfedb9c0434d56
+Author: Yan <yan.pierru@gmail.com>
+Date:   Tue Nov 10 19:08:48 2015 +0100
+
+    pick up stuff, some corrections
+
+commit 28893d21deefed5b152a481c9eaf7a30c870a5e6
+Author: Yan <yan.pierru@gmail.com>
+Date:   Tue Nov 10 13:44:04 2015 +0100
+
+    end of auth
+
+commit ae1ef72c5481f6c7a81c8051d7ba6bd7a8eaf08e
+Author: Yan <yan.pierru@gmail.com>
+Date:   Tue Nov 10 10:20:24 2015 +0100
+
+    merge
+
+commit a02dee23608cbd162ef6d9d670c0a4fec1473b23
+Merge: 02a461d 751f8df
+Author: Yan <yan.pierru@gmail.com>
+Date:   Tue Nov 10 08:41:18 2015 +0100
+
+    end of auth
+
+commit 751f8df80e465db3c240f84d59a007d1084bedc5
+Author: Charles Costrel de Corainville <Charles Costrel de Corainville>
+Date:   Mon Nov 9 21:09:30 2015 +0100
+
+    all gestion logIn and right + design
+
+commit 02a461d4db3a582db5c292bf8cbfd80a3b50a95e
+Author: Yan <yan.pierru@gmail.com>
+Date:   Mon Nov 9 14:07:54 2015 +0100
+
+    merge
+
+commit 617504526ff77d02d66a9ee5381db89ba2ea339e
+Author: Charles Costrel de Corainville <Charles Costrel de Corainville>
+Date:   Mon Nov 9 02:24:56 2015 +0100
+
+    all interfaces and authentification
+
+commit 340a18f50238335aaa19a7d65222ee58eaba0975
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sun Nov 8 20:52:52 2015 +0100
+
+    start to implement tools
+
+commit 50bcfed2875b2259d1d64198a703dfde511116e5
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sun Nov 8 11:28:48 2015 +0100
+
+    merge
+
+commit 09aeea23ace65e634f0caeab5172848e61efacd6
+Author: Charles Costrel de Corainville <Charles Costrel de Corainville>
+Date:   Sun Nov 8 01:20:05 2015 +0100
+
+    gestion log in with some design
+
+commit 3ba8afb8a54f7933e3e155d59520a06abbdbab94
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Nov 7 19:35:18 2015 +0100
+
+    lvl up func, reorganized code
+
+commit 669410d1fce5f08dea4e79c8da4ef31020883c3b
+Merge: 038d12d e829a55
+Author: Yan <yan.pierru@gmail.com>
+Date:   Fri Nov 6 15:56:55 2015 +0100
+
+    Merge pull request #4 from CCOSTREL/master
+    
+    interface fighter init
+
+commit e829a5545d766ca8f012284134eb6a165c226afa
+Author: Charles Costrel de Corainville <Charles Costrel de Corainville>
+Date:   Fri Nov 6 15:53:08 2015 +0100
+
+    interface fighter init
+
+commit 038d12d8570761bf7d244e3bd1b2cb511864aa3a
+Merge: ab97aa7 795bdc7
+Author: Yan <yan.pierru@gmail.com>
+Date:   Wed Nov 4 16:12:40 2015 +0100
+
+    Merge pull request #3 from CCOSTREL/master
+    
+    bootstrap design init
+
+commit 795bdc75c9d89cbac88b6b4eaa4e02bb3daac12c
+Author: Charles Costrel de Corainville <Charles Costrel de Corainville>
+Date:   Wed Nov 4 16:09:15 2015 +0100
+
+    bootstrap design init
+
+commit ab97aa72eef2bd821755dc4c2377bcff3eddcb47
+Author: Yan <yan.pierru@gmail.com>
+Date:   Mon Nov 2 17:05:27 2015 +0100
+
+    adding tools in db
+
+commit 26d038cc1dbc3991bb88c9eb5b8c9bcdd6240b07
+Merge: 192dc60 325a397
+Author: Yan <yan.pierru@gmail.com>
+Date:   Mon Nov 2 10:48:11 2015 +0100
+
+    Merge pull request #2 from ClMatthey/master
+    
+    display map
+
+commit 325a397a50cfd653bddd2952d562b7b72b4fa8d2
+Author: CMatthey <matthey.clement@hotmail.fr>
+Date:   Mon Nov 2 10:47:31 2015 +0100
+
+    modification of map creation function
+
+commit 192dc60e727a1dc548649da697d44ba6b1ad61f5
+Author: Yan <yan.pierru@gmail.com>
+Date:   Mon Nov 2 10:45:59 2015 +0100
+
+    Creating fighter
+
+commit d03aa1c56e2232a71df1839a20c344c4bd42e0bc
+Merge: 30a6217 5ef5f51
+Author: Yan <yan.pierru@gmail.com>
+Date:   Mon Nov 2 08:55:40 2015 +0100
+
+    Merge pull request #1 from ClMatthey/master
+    
+    PR From CM
+
+commit 5ef5f51c7d2ff5080059077e00bec8e3d1739630
+Author: CMatthey <matthey.clement@hotmail.fr>
+Date:   Mon Nov 2 08:40:13 2015 +0100
+
+    creation of the map variable
+
+commit b5565b86fb903d93fe0e65ca7f372bc1689a323c
+Author: CMatthey <matthey.clement@hotmail.fr>
+Date:   Sun Nov 1 18:33:40 2015 +0100
+
+    Add fview function to create the map (step1)
+
+commit 30a62173fa259f0ed11d85ae95a14b516e50ed90
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sun Nov 1 14:41:52 2015 +0100
+
+    apis, some changes about the visibility of the informations
+
+commit ec474121881dec3ef187da64ddcb42ef24cda33a
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Oct 31 19:08:52 2015 +0000
+
+    attack,move
+
+commit cd664e743a03b8778fab8d1b142f39316dfa03db
+Merge: c7b884e 463da41
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Oct 31 12:37:50 2015 +0000
+
+    Merge branch 'master' of https://github.com/YPierru/ArenaWeb
+    
+    Conflicts:
+    	README.md
+
+commit c7b884e023931fced820df3b8707f5636f5c9f92
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Oct 31 12:31:35 2015 +0000
+
+    first commit
+
+commit 463da41aa980fa2f35ab09639fefcc45c555e399
+Author: Yan <yan.pierru@gmail.com>
+Date:   Sat Oct 31 13:28:26 2015 +0100
+
+    Initial commit
